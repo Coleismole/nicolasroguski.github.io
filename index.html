@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolas Roguski — Biomedical Physiology Student</title>
+<meta name="description" content="Nicolas Roguski is a Biomedical Physiology student at Simon Fraser University, passionate about bridging foundational science with real-world health applications. Open to research opportunities.">
+<meta property="og:title" content="Nicolas Roguski — Biomedical Physiology Student">
+<meta property="og:description" content="Bridging the science of medicine with compassionate patient care — one compound, one study, one breakthrough at a time.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://509740d6-e30b-4dad-b618-bb47acf9ca3a-00-125v2i2g5b50v.spock.replit.dev">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nicolas Roguski — Biomedical Physiology Student">
+<meta name="twitter:description" content="Bridging the science of medicine with compassionate patient care — one compound, one study, one breakthrough at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
+<script src="analytics.js" defer></script>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">N. Roguski</div>
+  <div class="loader-center">
+    <div class="loader-num-wrap">
+      <span class="loader-num">0</span><span class="loader-pct">%</span>
+    </div>
+    <p class="loader-label">Biomedical Physiology · SFU</p>
+  </div>
+  <div class="loader-bar-track">
+    <div class="loader-bar-fill" id="loader-bar"></div>
+  </div>
+</div>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="page-overlay"></div>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">N. Roguski</a>
+  <ul class="nav-links" id="nav-links">
+    <li>
+      <a href="#about">About</a>
+      <div class="nav-preview">
+        <p class="nav-preview-title">About Me</p>
+        <p class="nav-preview-desc">SFU Biomedical Physiology student open to research</p>
+      </div>
+    </li>
+    <li>
+      <a href="#skills">Skills</a>
+      <div class="nav-preview">
+        <p class="nav-preview-title">Expertise</p>
+        <p class="nav-preview-desc">Physiology, biochemistry, neuroscience & pharmacology</p>
+      </div>
+    </li>
+    <li>
+      <a href="#projects">Works</a>
+      <div class="nav-preview">
+        <p class="nav-preview-title">Selected Works</p>
+        <p class="nav-preview-desc">Research papers & academic projects</p>
+      </div>
+    </li>
+    <li>
+      <a href="#contact">Contact</a>
+      <div class="nav-preview">
+        <p class="nav-preview-title">Get in Touch</p>
+        <p class="nav-preview-desc">Open to research, internships & collaboration</p>
+      </div>
+    </li>
+  </ul>
+  <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">☽</button>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Biomedical Physiology · SFU</p>
+    <p class="hero-role"><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></p>
+    <h1 class="hero-name">
+      <span class="hero-name-line"><span>Nicolas</span></span>
+      <span class="hero-name-line"><em><span>Roguski</span></em></span>
+    </h1>
+    <p class="hero-tagline">
+      Bridging the science of medicine with compassionate patient care —
+      one compound, one study, one breakthrough at a time.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      <button onclick="openCVModal()" class="btn btn-cv">View CV ↓</button>
+    </div>
+    <div class="hero-stat-strip">
+      <div class="hero-stat">
+        <span class="hero-stat-num" data-count="4" data-suffix="+">4+</span>
+        <span class="hero-stat-label">Years of study</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">Rx</span>
+        <span class="hero-stat-label">Clinical focus</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">∞</span>
+        <span class="hero-stat-label">Curiosity</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" onload="this.classList.add('loaded')">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <p class="section-label">About me</p>
+    <div class="title-clip">
+      <h2 class="section-title">Science, care, &amp; curiosity.</h2>
+    </div>
+    <p class="about-body">I'm <strong>Nicolas Roguski</strong>, a Biomedical Physiology student at Simon Fraser University, driven by a fascination with how the human body works at every scale — from cellular signalling to whole-system function. I'm passionate about bridging foundational science with real-world health applications.</p>
+    <p class="about-body">My studies at SFU have immersed me in physiology, anatomy, biochemistry, and neuroscience, building a rigorous scientific foundation that fuels my curiosity and my ambition to pursue graduate-level research or a career in the health sciences.</p>
+    <p class="about-body">Outside the lab and lecture hall, I'm always exploring new ideas — whether that's a journal deep-dive, a new research thread, or a conversation that challenges my thinking.</p>
+  </div>
+  <div class="about-sidebar">
+    <div class="about-card">
+      <p class="about-card-label">University</p>
+      <p class="about-card-value">Simon Fraser University</p>
+    </div>
+    <div class="about-card">
+      <p class="about-card-label">Program</p>
+      <p class="about-card-value">BSc Biomedical Physiology</p>
+    </div>
+    <div class="about-card">
+      <p class="about-card-label">Current Status</p>
+      <p class="about-card-value">Current Student — Open to Research Opportunities</p>
+    </div>
+    <div class="about-card">
+      <p class="about-card-label">Location</p>
+      <p class="about-card-value">Burnaby, BC, Canada</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION TIMELINE -->
+<section id="education">
+  <p class="section-label">Education</p>
+  <div class="title-clip">
+    <h2 class="section-title">Academic journey.</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-line"></div>
+    <div class="timeline-item">
+      <p class="timeline-period">2026 — Present</p>
+      <h3 class="timeline-inst">Simon Fraser University</h3>
+      <p class="timeline-prog">BSc Biomedical Physiology</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Current Student</span>
+        <span class="timeline-tag">Open to Research</span>
+        <span class="timeline-tag">Burnaby, BC</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-period">2022 — 2026</p>
+      <h3 class="timeline-inst">École Dr. Charles Best Secondary</h3>
+      <p class="timeline-prog">Graduated with Honor Cord</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Honor Roll 2023</span>
+        <span class="timeline-tag">Honor Roll 2024</span>
+        <span class="timeline-tag">Honor Roll 2025</span>
+        <span class="timeline-tag">Honor Roll 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Expertise</p>
+  <div class="title-clip">
+    <h2 class="section-title">Areas of knowledge.</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-item">
+      <span class="skill-tooltip">Cardiovascular · Respiratory · Renal · Endocrine</span>
+      <span class="skill-icon">♥</span>
+      <p class="skill-name">Human Physiology</p>
+      <p class="skill-desc">Cardiovascular, respiratory, renal &amp; endocrine system function</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-tooltip">Metabolic pathways · Enzyme kinetics · Mol. biology</span>
+      <span class="skill-icon">⚗</span>
+      <p class="skill-name">Biochemistry</p>
+      <p class="skill-desc">Metabolic pathways, enzyme kinetics &amp; molecular biology</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">82%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-tooltip">Neural signalling · Synaptic transmission · CNS</span>
+      <span class="skill-icon">◉</span>
+      <p class="skill-name">Neuroscience</p>
+      <p class="skill-desc">Neural signalling, synaptic transmission &amp; CNS function</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">78%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-tooltip">Gross anatomy · Histology · Structural–functional</span>
+      <span class="skill-icon">∑</span>
+      <p class="skill-name">Anatomy</p>
+      <p class="skill-desc">Gross anatomy, histology &amp; structural–functional relationships</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">85%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-tooltip">Drug mechanisms · Receptor theory · Clinical response</span>
+      <span class="skill-icon">⊕</span>
+      <p class="skill-name">Pharmacology</p>
+      <p class="skill-desc">Drug mechanisms, receptor theory &amp; physiological responses</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">75%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+      </div>
+    </div>
+    <div class="skill-item">
+      <span class="skill-tooltip">Literature review · Data interpretation · Sci. writing</span>
+      <span class="skill-icon">≡</span>
+      <p class="skill-name">Research &amp; Analysis</p>
+      <p class="skill-desc">Literature review, data interpretation &amp; scientific writing</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span class="skill-bar-pct">88%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPIC STRIP -->
+<div class="topic-strip">
+  <div class="topic-track" id="topic-track">
+    <span class="topic-item">Pharmacokinetics</span>
+    <span class="topic-item">Neurodegeneration</span>
+    <span class="topic-item">CRISPR</span>
+    <span class="topic-item">Drug Discovery</span>
+    <span class="topic-item">Cellular Signalling</span>
+    <span class="topic-item">Epigenetics</span>
+    <span class="topic-item">Clinical Trials</span>
+    <span class="topic-item">Proteomics</span>
+    <span class="topic-item">Systems Biology</span>
+    <span class="topic-item">Biomarkers</span>
+    <span class="topic-item">Translational Research</span>
+    <span class="topic-item">Precision Medicine</span>
+    <span class="topic-item">Pharmacokinetics</span>
+    <span class="topic-item">Neurodegeneration</span>
+    <span class="topic-item">CRISPR</span>
+    <span class="topic-item">Drug Discovery</span>
+    <span class="topic-item">Cellular Signalling</span>
+    <span class="topic-item">Epigenetics</span>
+    <span class="topic-item">Clinical Trials</span>
+    <span class="topic-item">Proteomics</span>
+    <span class="topic-item">Systems Biology</span>
+    <span class="topic-item">Biomarkers</span>
+    <span class="topic-item">Translational Research</span>
+    <span class="topic-item">Precision Medicine</span>
+  </div>
+</div>
+
+<!-- PROJECTS (horizontal scroll) -->
+<section id="projects">
+  <div class="projects-intro">
+    <p class="section-label">Portfolio</p>
+    <div class="title-clip">
+      <h2 class="section-title">Selected works.</h2>
+    </div>
+    <p class="projects-scroll-hint">Scroll to explore →</p>
+  </div>
+  <div class="projects-horizontal-outer">
+    <div class="projects-horizontal-track">
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-card-header">
+            <span class="project-num">01</span>
+            <span class="project-tag">Research Paper</span>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">Myostatin Inhibition as a Therapeutic Strategy</h3>
+            <p class="project-desc">A comprehensive review of myostatin (GDF-8) biology, inhibitory mechanisms, and clinical evidence across muscle-wasting conditions including Duchenne muscular dystrophy, sarcopenia, and cancer cachexia.</p>
+            <a href="myostatin-inhibitors.html" class="project-link">Read more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card project-card--dim">
+        <div class="project-card-inner">
+          <div class="project-card-header project-card-header--alt">
+            <span class="project-num">02</span>
+            <span class="project-tag project-tag--progress">In Progress</span>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">Exercise Physiology &amp; VO₂ Max Adaptation</h3>
+            <p class="project-desc">Investigating the central and peripheral adaptations driving improvements in maximal oxygen uptake — from cardiac output and stroke volume to mitochondrial biogenesis and skeletal muscle capillarity.</p>
+            <span class="project-link project-link--muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card project-card--dim">
+        <div class="project-card-inner">
+          <div class="project-card-header project-card-header--alt2">
+            <span class="project-num">03</span>
+            <span class="project-tag project-tag--planned">Planned</span>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">Neuropharmacology of the Stress Response</h3>
+            <p class="project-desc">An exploration of the HPA axis, glucocorticoid receptor signalling, and the pharmacological interventions targeting chronic stress — with implications for anxiety disorders, depression, and metabolic disease.</p>
+            <span class="project-link project-link--muted">Coming soon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <p class="section-label">Let's connect</p>
+    <div class="title-clip">
+      <h2 class="section-title">Get in touch.</h2>
+    </div>
+    <p class="contact-sub">Whether you're interested in collaboration, research, or just want to talk science — I'd love to hear from you.</p>
+    <div class="contact-info">
+      <div class="email-copy contact-info-item" onclick="copyEmail()" title="Click to copy">
+        <span>✉</span>
+        coleroguski@gmail.com
+        <span class="email-copy-hint">click to copy</span>
+      </div>
+      <div class="contact-info-item">
+        <span>⊞</span>
+        <a href="https://www.linkedin.com/in/nicolas-ross-roguski-66028937b" target="_blank" style="color:inherit;text-decoration:none;">linkedin.com/in/nicolas-ross-roguski</a>
+      </div>
+      <div class="contact-info-item">
+        <span>◎</span>
+        Available for research &amp; internships
+      </div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <input type="text" name="subject" placeholder="Subject">
+      <textarea name="message" placeholder="Your message..."></textarea>
+      <button type="submit" class="btn btn-gold">Send message</button>
+    </form>
+  </div>
+</section>
+
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<!-- AVAILABILITY BADGE -->
+<div id="availability-badge">
+  <span class="badge-dot"></span>
+  Open to Research
+</div>
+
+<!-- COPY TOAST -->
+<div id="copy-toast">Email copied ✓</div>
+
+<!-- CV MODAL -->
+<div id="cv-modal">
+  <div id="cv-modal-backdrop" onclick="closeCVModal()"></div>
+  <div id="cv-modal-panel">
+    <div id="cv-modal-bar">
+      <span id="cv-modal-title">Nicolas Roguski — Curriculum Vitae</span>
+      <div class="cv-modal-actions">
+        <a href="nicolas-roguski-cv.pdf" download class="cv-modal-btn">Download ↓</a>
+        <button class="cv-modal-btn" onclick="closeCVModal()">✕ Close</button>
+      </div>
+    </div>
+    <iframe id="cv-iframe" src="" title="CV Preview"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Nicolas Roguski</p>
+  <div class="footer-social">
+    <a href="#" onclick="copyEmail(); return false;">✉ Email</a>
+    <a href="https://www.linkedin.com/in/nicolas-ross-roguski-66028937b" target="_blank">⊞ LinkedIn</a>
+  </div>
+  <p class="footer-copy">© 2026 · Biomedical Physiology · SFU</p>
+</footer>
+
+<!-- GSAP + ScrollTrigger + Lenis -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+// ── GSAP + Lenis setup ────────────────────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, wheelMultiplier: 1.2, touchMultiplier: 1.8 });
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+// ── Dark mode (run before paint) ───────────────────────────────────────────────
+const html = document.documentElement;
+const darkToggle = document.getElementById('dark-toggle');
+if (localStorage.getItem('dark') === '1') { html.classList.add('dark'); darkToggle.textContent = '○'; }
+darkToggle.addEventListener('click', () => {
+  html.classList.toggle('dark');
+  const on = html.classList.contains('dark');
+  darkToggle.textContent = on ? '○' : '☽';
+  localStorage.setItem('dark', on ? '1' : '0');
+});
+
+// ── Page load reveal ───────────────────────────────────────────────────────────
+document.body.classList.add('loaded');
+window.addEventListener('pageshow', (e) => {
+  document.getElementById('page-overlay').classList.remove('active');
+  document.body.classList.add('loaded');
+  // Skip loader only when restored from bfcache (back/forward navigation)
+  if (e.persisted) {
+    const loader = document.getElementById('loader');
+    if (loader) { loader.style.display = 'none'; }
+    startHeroAnimation();
+  }
+});
+
+// ── Hero entrance animation (called after loader exits) ────────────────────────
+function startHeroAnimation() {
+  const heroTl = gsap.timeline({ delay: 0.05 });
+  heroTl
+    .from('.hero-eyebrow', { y: 22, opacity: 0, duration: 0.8, ease: 'power3.out' })
+    .from('.hero-role',    { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-name-line > *', {
+      y: '105%', duration: 1.05, ease: 'power4.out', stagger: 0.12
+    }, '-=0.4')
+    .from('.hero-tagline',   { y: 24, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.55')
+    .from('.hero-cta',       { y: 20, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .from('.hero-stat-strip',{ y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.45')
+    .from('.hero-photo-wrap',{ scale: 1.06, opacity: 0, duration: 1.3, ease: 'power3.out' }, '-=0.9');
+}
+
+// ── Loader sequence ────────────────────────────────────────────────────────────
+(function runLoader() {
+  const loader    = document.getElementById('loader');
+  const loaderNum = loader.querySelector('.loader-num');
+  const loaderBar = document.getElementById('loader-bar');
+
+  // Fade in loader elements
+  gsap.from('.loader-logo',  { y: -16, opacity: 0, duration: 0.6, ease: 'power2.out', delay: 0.1 });
+  gsap.from('.loader-center',{ y: 20,  opacity: 0, duration: 0.7, ease: 'power2.out', delay: 0.2 });
+
+  const counter = { val: 0 };
+  gsap.to(counter, {
+    val: 100,
+    duration: 1.55,
+    delay: 0.35,
+    ease: 'power1.inOut',
+    onUpdate() {
+      const v = Math.round(counter.val);
+      loaderNum.textContent = v;
+      loaderBar.style.width = v + '%';
+    },
+    onComplete() {
+      // Brief pause at 100, then split-exit the loader panel
+      gsap.to(loader, {
+        yPercent: -100,
+        duration: 0.78,
+        delay: 0.18,
+        ease: 'power3.inOut',
+        onComplete() {
+          loader.style.display = 'none';
+          startHeroAnimation();
+          ScrollTrigger.refresh();
+        }
+      });
+    }
+  });
+})();
+
+// ── Hero photo parallax on scroll ─────────────────────────────────────────────
+gsap.to('.hero-photo-wrap', {
+  yPercent: 12,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: true
+  }
+});
+
+// ── Nav shrink on scroll ───────────────────────────────────────────────────────
+ScrollTrigger.create({
+  start: 'top -60',
+  onEnter: () => document.getElementById('main-nav').classList.add('scrolled'),
+  onLeaveBack: () => document.getElementById('main-nav').classList.remove('scrolled')
+});
+
+// ── Scroll progress bar ────────────────────────────────────────────────────────
+const progressBar = document.getElementById('scroll-progress');
+const backToTop = document.getElementById('back-to-top');
+lenis.on('scroll', ({ progress }) => {
+  progressBar.style.width = (progress * 100) + '%';
+  backToTop.classList.toggle('visible', progress > 0.12);
+});
+
+// ── Active nav highlight ───────────────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a');
+document.querySelectorAll('section[id]').forEach(section => {
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top 45%',
+    end: 'bottom 45%',
+    onEnter: () => setActive(section.id),
+    onEnterBack: () => setActive(section.id)
+  });
+});
+function setActive(id) {
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+  });
+}
+
+// ── Smooth anchor scroll via Lenis ────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const href = anchor.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    lenis.scrollTo(href, { offset: -72, duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  });
+});
+
+// ── Section title clip reveals ─────────────────────────────────────────────────
+document.querySelectorAll('.title-clip .section-title').forEach(el => {
+  gsap.from(el, {
+    y: '108%',
+    duration: 1.0,
+    ease: 'power4.out',
+    scrollTrigger: { trigger: el.parentElement, start: 'top 88%' }
+  });
+});
+
+// ── Section labels slide in ────────────────────────────────────────────────────
+gsap.utils.toArray('.section-label').forEach(el => {
+  gsap.from(el, {
+    x: -20, opacity: 0, duration: 0.7, ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 90%' }
+  });
+});
+
+// ── About section ─────────────────────────────────────────────────────────────
+gsap.from('.about-text', {
+  x: -50, opacity: 0, duration: 1.1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#about', start: 'top 72%' }
+});
+gsap.from('.about-sidebar', {
+  x: 50, opacity: 0, duration: 1.1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#about', start: 'top 72%' }
+});
+gsap.from('.about-body', {
+  y: 20, opacity: 0, duration: 0.7, ease: 'power2.out', stagger: 0.15,
+  scrollTrigger: { trigger: '.about-text', start: 'top 75%' }
+});
+gsap.from('.about-card', {
+  y: 30, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.12,
+  scrollTrigger: { trigger: '.about-sidebar', start: 'top 75%' }
+});
+
+// ── Timeline draw animation ────────────────────────────────────────────────────
+gsap.from('.timeline-line', {
+  scaleY: 0,
+  transformOrigin: 'top center',
+  duration: 1.4,
+  ease: 'power2.out',
+  scrollTrigger: { trigger: '.timeline', start: 'top 78%' }
+});
+gsap.from('.timeline-item', {
+  x: -44, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.28,
+  scrollTrigger: { trigger: '.timeline', start: 'top 78%' }
+});
+
+// ── Skills stagger + bar fills ─────────────────────────────────────────────────
+gsap.from('.skill-item', {
+  y: 50, opacity: 0, duration: 0.75, ease: 'power3.out', stagger: 0.1,
+  scrollTrigger: { trigger: '.skills-grid', start: 'top 75%' }
+});
+
+document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+  const targetWidth = bar.dataset.width;
+  gsap.fromTo(bar,
+    { width: 0 },
+    {
+      width: targetWidth + '%',
+      duration: 1.4,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: bar, start: 'top 90%' }
+    }
+  );
+});
+
+// ── Projects horizontal scroll (desktop only) ─────────────────────────────────
+const mm = gsap.matchMedia();
+
+mm.add('(min-width: 900px)', () => {
+  const outer = document.querySelector('.projects-horizontal-outer');
+  const track = document.querySelector('.projects-horizontal-track');
+
+  const getScrollDistance = () => track.scrollWidth - outer.offsetWidth;
+
+  const hScroll = gsap.to(track, {
+    x: () => -getScrollDistance(),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#projects',
+      pin: true,
+      anticipatePin: 1,
+      scrub: 1.2,
+      end: () => '+=' + getScrollDistance(),
+      invalidateOnRefresh: true
+    }
+  });
+
+  gsap.from('.project-card', {
+    opacity: 0,
+    x: 60,
+    duration: 0.9,
+    ease: 'power3.out',
+    stagger: 0.15,
+    scrollTrigger: { trigger: '#projects', start: 'top 75%' }
+  });
+
+  return () => { hScroll.scrollTrigger.kill(); };
+});
+
+mm.add('(max-width: 899px)', () => {
+  gsap.from('.project-card', {
+    y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
+    scrollTrigger: { trigger: '.projects-horizontal-track', start: 'top 80%' }
+  });
+});
+
+// ── Contact reveal ─────────────────────────────────────────────────────────────
+gsap.from('.contact-left', {
+  x: -50, opacity: 0, duration: 1.1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 75%' }
+});
+gsap.from('.contact-right', {
+  x: 50, opacity: 0, duration: 1.1, ease: 'power3.out',
+  scrollTrigger: { trigger: '#contact', start: 'top 75%' }
+});
+gsap.from('.contact-info-item', {
+  y: 20, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.12,
+  scrollTrigger: { trigger: '.contact-info', start: 'top 82%' }
+});
+gsap.from('.contact-sub', {
+  y: 16, opacity: 0, duration: 0.7, ease: 'power2.out',
+  scrollTrigger: { trigger: '.contact-sub', start: 'top 88%' }
+});
+gsap.from('.contact-form input, .contact-form textarea, .contact-form button', {
+  y: 20, opacity: 0, duration: 0.55, ease: 'power2.out', stagger: 0.09,
+  scrollTrigger: { trigger: '.contact-form', start: 'top 82%' }
+});
+
+// ── Scroll-reveal hint pulsing ─────────────────────────────────────────────────
+gsap.from('.projects-scroll-hint', {
+  opacity: 0, y: 10, duration: 0.6, ease: 'power2.out',
+  scrollTrigger: { trigger: '#projects', start: 'top 80%' }
+});
+
+// ── Counting stat animation ────────────────────────────────────────────────────
+const countEls = document.querySelectorAll('[data-count]');
+countEls.forEach(el => {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      gsap.fromTo({ val: 0 }, { val: target, duration: 1.4, ease: 'power2.out',
+        onUpdate: function() { el.textContent = Math.round(this.targets()[0].val) + suffix; }
+      });
+    }
+  });
+});
+
+// ── Hamburger menu ─────────────────────────────────────────────────────────────
+const hamburger = document.getElementById('nav-hamburger');
+const navMenu = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navMenu.classList.toggle('open');
+});
+navMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navMenu.classList.remove('open');
+  });
+});
+
+// ── Custom cursor ──────────────────────────────────────────────────────────────
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animateCursor() {
+  rx += (mx - rx) * 0.18;
+  ry += (my - ry) * 0.18;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+document.querySelectorAll('a, button, .skill-item, .project-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});
+
+// ── Back to top ────────────────────────────────────────────────────────────────
+backToTop.addEventListener('click', () => lenis.scrollTo(0, { duration: 1.6 }));
+
+// ── Page transitions (outbound links to sub-pages) ────────────────────────────
+const overlay = document.getElementById('page-overlay');
+document.querySelectorAll('a[href]').forEach(link => {
+  const href = link.getAttribute('href');
+  if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto')) {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      overlay.classList.add('active');
+      setTimeout(() => { window.location.href = href; }, 360);
+    });
+  }
+});
+
+// ── Typewriter effect ──────────────────────────────────────────────────────────
+const words = ['Student', 'Researcher', 'Scientist', 'Future Clinician', 'Curious Mind'];
+const tw = document.getElementById('typewriter-text');
+let wi = 0, ci = 0, deleting = false;
+function typeLoop() {
+  const word = words[wi];
+  if (!deleting) {
+    tw.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+  } else {
+    tw.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(typeLoop, 300); return; }
+  }
+  setTimeout(typeLoop, deleting ? 55 : 90);
+}
+setTimeout(typeLoop, 1200);
+
+// ── 3D card tilt + glare ──────────────────────────────────────────────────────
+document.querySelectorAll('.project-card').forEach(card => {
+  const glare = document.createElement('div');
+  glare.className = 'project-card-glare';
+  card.appendChild(glare);
+  const inner = card.querySelector('.project-card-inner');
+  let rafId = null, curRx = 0, curRy = 0, tgtRx = 0, tgtRy = 0, mouseX = 50, mouseY = 50, active = false;
+  function animateTilt() {
+    curRx += (tgtRx - curRx) * 0.1;
+    curRy += (tgtRy - curRy) * 0.1;
+    card.style.transition = 'none';
+    card.style.transform = `perspective(1200px) rotateX(${curRx}deg) rotateY(${curRy}deg) translateY(-4px)`;
+    card.style.boxShadow = `${-curRy * 1.2}px ${curRx * 1.2}px 36px rgba(28,42,74,0.13)`;
+    glare.style.setProperty('--gx', mouseX + '%');
+    glare.style.setProperty('--gy', mouseY + '%');
+    if (inner) {
+      inner.style.transition = 'none';
+      inner.style.transform = `translateX(${curRy * -1.4}px) translateY(${curRx * 1.4}px)`;
+    }
+    if (active || Math.abs(curRx) > 0.05 || Math.abs(curRy) > 0.05) {
+      rafId = requestAnimationFrame(animateTilt);
+    } else {
+      curRx = 0; curRy = 0;
+      card.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
+      card.style.transform = '';
+      card.style.boxShadow = '';
+      if (inner) { inner.style.transition = 'transform 0.4s ease'; inner.style.transform = ''; }
+      rafId = null;
+    }
+  }
+  card.addEventListener('mouseenter', () => { active = true; if (!rafId) rafId = requestAnimationFrame(animateTilt); });
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    tgtRx = ((e.clientY - r.top  - r.height / 2) / r.height) * -5;
+    tgtRy = ((e.clientX - r.left - r.width  / 2) / r.width)  *  5;
+    mouseX = ((e.clientX - r.left) / r.width)  * 100;
+    mouseY = ((e.clientY - r.top)  / r.height) * 100;
+  });
+  card.addEventListener('mouseleave', () => { active = false; tgtRx = 0; tgtRy = 0; });
+});
+
+// ── Copy email ─────────────────────────────────────────────────────────────────
+const copyToast = document.getElementById('copy-toast');
+let toastTimer;
+function copyEmail() {
+  navigator.clipboard.writeText('coleroguski@gmail.com').then(() => {
+    clearTimeout(toastTimer);
+    copyToast.classList.add('show');
+    toastTimer = setTimeout(() => copyToast.classList.remove('show'), 2200);
+  });
+}
+
+// ── CV Modal ───────────────────────────────────────────────────────────────────
+const cvModal = document.getElementById('cv-modal');
+const cvIframe = document.getElementById('cv-iframe');
+let cvLoaded = false;
+function openCVModal() {
+  if (!cvLoaded) { cvIframe.src = 'nicolas-roguski-cv.pdf'; cvLoaded = true; }
+  cvModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lenis.stop();
+}
+function closeCVModal() {
+  cvModal.classList.remove('open');
+  document.body.style.overflow = '';
+  lenis.start();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCVModal(); });
+
+// ── Animated tab title ─────────────────────────────────────────────────────────
+const origTitle = document.title;
+document.addEventListener('visibilitychange', () => {
+  document.title = document.hidden ? '👋 Come back — N. Roguski' : origTitle;
+});
+
+// ── Contact form via Formspree ─────────────────────────────────────────────────
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/xzdwyynv', {
+      method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      btn.textContent = 'Message sent ✓';
+      btn.style.background = '#3d6147'; btn.style.borderColor = '#3d6147'; btn.style.color = '#f5f0e8';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = 'Send message';
+        btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; btn.disabled = false;
+      }, 3500);
+    } else {
+      btn.textContent = 'Error — try again'; btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
+    }
+  } catch {
+    btn.textContent = 'Error — try again'; btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
+  }
+}
+</script>
+</body>
+</html>

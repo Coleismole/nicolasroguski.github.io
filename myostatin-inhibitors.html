@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myostatin Inhibition as a Therapeutic Strategy — Nicolas Roguski</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="subpage-styles.css">
+<style>
+  .page-header { background: var(--sage); }
+  .page-header::after { content: '01'; }
+
+  .paper-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--warm-mid);
+  }
+  .paper-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .paper-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .paper-meta-value {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+  }
+
+  .paper-abstract {
+    background: #f9f7f3;
+    border-left: 3px solid var(--sage);
+    padding: 1.8rem 2rem;
+    margin-bottom: 3rem;
+  }
+  .paper-abstract h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+  .paper-abstract p {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-dark);
+    margin: 0 0 1rem;
+  }
+  .paper-abstract p:last-child { margin-bottom: 0; }
+
+  .keywords {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+  .keywords strong {
+    color: var(--text-dark);
+  }
+
+  .paper-section {
+    margin-bottom: 3rem;
+  }
+  .paper-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--warm-mid);
+  }
+  .paper-section h3 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--sage);
+    letter-spacing: 0.03em;
+    margin: 1.8rem 0 0.8rem;
+  }
+  .paper-section p {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: #3a3a36;
+    margin-bottom: 1rem;
+  }
+  .paper-section p:last-child { margin-bottom: 0; }
+
+  sup {
+    font-size: 0.65rem;
+    color: var(--sage);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .references-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--warm-mid);
+  }
+  .references-section h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .reference-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: ref-counter;
+  }
+  .reference-list li {
+    counter-increment: ref-counter;
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #5a5a52;
+  }
+  .reference-list li::before {
+    content: counter(ref-counter) ".";
+    position: absolute;
+    left: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--sage);
+    top: 0.1rem;
+  }
+  .reference-list a {
+    color: var(--sage);
+    text-decoration: none;
+  }
+  .reference-list a:hover {
+    text-decoration: underline;
+  }
+</style>
+<script src="analytics.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">N. Roguski</a>
+  <a href="index.html#projects" class="nav-back">Back to works</a>
+</nav>
+
+<div class="page-header">
+  <p class="header-tag">Research Paper</p>
+  <h1 class="page-title">Myostatin Inhibition as a Therapeutic Strategy</h1>
+  <p class="page-subtitle">Mechanisms, Clinical Applications, and Future Directions</p>
+</div>
+
+<div class="content-area">
+
+  <div class="paper-meta">
+    <div class="paper-meta-item">
+      <span class="paper-meta-label">Author</span>
+      <span class="paper-meta-value">Nicolas Roguski</span>
+    </div>
+    <div class="paper-meta-item">
+      <span class="paper-meta-label">Year</span>
+      <span class="paper-meta-value">2026</span>
+    </div>
+    <div class="paper-meta-item">
+      <span class="paper-meta-label">Field</span>
+      <span class="paper-meta-value">Biomedical Physiology / Musculoskeletal Pharmacology</span>
+    </div>
+    <div class="paper-meta-item">
+      <span class="paper-meta-label">Reading Time</span>
+      <span class="paper-meta-value" id="reading-time">—</span>
+    </div>
+  </div>
+
+  <div class="paper-abstract">
+    <h2>Abstract</h2>
+    <p>Myostatin (GDF-8), a member of the transforming growth factor-beta (TGF-β) superfamily, functions as a potent negative regulator of skeletal muscle growth. Since its discovery in 1997, research into myostatin biology has generated substantial interest in therapeutic inhibition as a strategy to combat muscle-wasting conditions including Duchenne muscular dystrophy (DMD), sarcopenia, and cancer cachexia.</p>
+    <p>This paper reviews the molecular mechanisms by which myostatin constrains skeletal muscle mass, examines the major classes of inhibitory agents developed to date—including neutralizing antibodies, activin receptor decoys, follistatin derivatives, and gene-based interventions—and evaluates evidence from preclinical and clinical studies. Despite promising results in animal models, translation to human trials has encountered challenges related to efficacy, safety, and biomarker validation. Emerging approaches, including selective inhibition and combinatorial strategies, may offer more targeted therapeutic windows. The physiological complexity of myostatin signalling, its crosstalk with bone and metabolic tissues, and interindividual variability underscore both the promise and the difficulty of this therapeutic avenue.</p>
+    <p class="keywords"><strong>Keywords:</strong> myostatin, GDF-8, muscle atrophy, TGF-β superfamily, ActRIIB, follistatin, sarcopenia, Duchenne muscular dystrophy, bimagrumab, muscle wasting</p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Introduction</h2>
+    <p>Skeletal muscle mass is a carefully regulated physiological parameter governed by the balance between anabolic stimuli—such as mechanical loading and insulin-like growth factor 1 (IGF-1)—and catabolic signals that promote protein degradation and suppress myogenesis. Among the latter, myostatin (also designated Growth Differentiation Factor-8, or GDF-8) occupies a particularly central and well-characterised role. First identified by McPherron, Lawler, and Lee in 1997, myostatin was found to be a secreted protein predominantly expressed in skeletal muscle; mice lacking the myostatin gene exhibited dramatic, widespread muscle hypertrophy, with muscle mass approximately double that of wild-type littermates.<sup>1</sup></p>
+    <p>The biological significance of this discovery was rapidly amplified by findings in other species. Belgian Blue and Piedmontese cattle—long bred for their extreme muscularity—were found to carry natural loss-of-function mutations in the myostatin gene, producing the characteristic double-muscled phenotype.<sup>2</sup> Perhaps most striking was a 2004 report in the <em>New England Journal of Medicine</em> describing a child in Germany who, from birth, displayed exceptional muscular development; genetic analysis revealed a homozygous splice-site mutation rendering myostatin nonfunctional.<sup>3</sup> These naturally occurring experiments collectively established myostatin as a genuine brake on muscle growth across mammals, and catalysed the hypothesis that pharmacological inhibition might restore or preserve muscle mass in disease states.</p>
+    <p>The clinical motivation for pursuing myostatin inhibition is substantial. Conditions characterised by pathological muscle loss—including DMD, spinal muscular atrophy (SMA), amyotrophic lateral sclerosis (ALS), age-related sarcopenia, and cancer cachexia—carry enormous burdens in terms of morbidity, functional decline, and mortality. No disease-modifying pharmacological agent targeting muscle mass is currently approved for most of these indications. This paper reviews the molecular biology of myostatin, the principal strategies developed for its inhibition, and the evidence—preclinical and clinical—for therapeutic efficacy, while acknowledging the significant challenges that have tempered initial optimism.</p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Myostatin Biology and Signalling</h2>
+
+    <h3>Structure and Processing</h3>
+    <p>Myostatin is synthesised as a 375-amino-acid precursor (prepro-myostatin) that undergoes cleavage of a signal peptide to yield pro-myostatin. Subsequent proteolytic processing by furin convertases releases an N-terminal prodomain (the latency-associated peptide, LAP) and a C-terminal mature dimer, which is the biologically active ligand.<sup>4</sup> The mature myostatin dimer is held in a latent complex with the prodomain and circulates in plasma in this form. Activation requires dissociation of the prodomain by extracellular proteases, notably members of the BMP-1/tolloid metalloproteinase family, releasing active myostatin to bind its receptors.<sup>5</sup></p>
+    <p>Active myostatin binds with high affinity to the type II activin receptor B (ActRIIB), which recruits and transphosphorylates the type I receptor ALK4 or ALK5. This activated receptor complex phosphorylates the intracellular transcription factors SMAD2 and SMAD3, which then associate with the co-SMAD (SMAD4) and translocate to the nucleus. There, the SMAD complex represses the expression of myogenic regulatory factors, including MyoD and myogenin, while upregulating the CDK inhibitor p21, collectively inhibiting satellite cell activation, myoblast differentiation, and protein synthesis.<sup>4,6</sup></p>
+
+    <h3>Endogenous Inhibitory Mechanisms</h3>
+    <p>The body maintains several endogenous mechanisms for attenuating myostatin activity, each of which has informed therapeutic strategy. Follistatin (FST), a structurally unrelated glycoprotein, binds myostatin—as well as activins and several other TGF-β family members—with high affinity, preventing receptor engagement.<sup>7</sup> Follistatin-like 3 (FSTL3) performs a similar function. Growth and Differentiation Factor-Associated Serum Proteins 1 and 2 (GASP-1 and GASP-2) bind the prodomain of myostatin and inhibit its activity in the extracellular space.<sup>8</sup> The myostatin propeptide itself retains inhibitory activity and can be exploited therapeutically. This redundancy in endogenous inhibition underscores the physiological importance of keeping myostatin in check, and suggests that multiple pharmacological entry points exist.</p>
+    <p>Beyond skeletal muscle, myostatin is expressed at low levels in cardiac muscle and adipose tissue, and has functional roles in adipogenesis, bone metabolism, and glucose homeostasis.<sup>9</sup> This pleiotropy is a critical consideration in therapeutic development: interventions that broadly inhibit myostatin or its receptor may produce off-target effects in tissues beyond skeletal muscle.</p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Classes of Myostatin Inhibitors</h2>
+
+    <h3>Neutralising Antibodies Against Myostatin</h3>
+    <p>Monoclonal antibodies that directly neutralise mature myostatin represent the most straightforward inhibitory approach. Stamulumab (MYO-029, Wyeth) was among the first myostatin-specific antibodies to enter clinical trials, evaluated in a Phase I/II study enrolling adults with Becker muscular dystrophy, facioscapulohumeral dystrophy, and limb-girdle muscular dystrophy. While the agent demonstrated acceptable safety and measurable pharmacokinetic profiles, functional efficacy outcomes—including muscle strength and lean mass—were not statistically significant, likely owing to inadequate dosing and the heterogeneous patient population.<sup>10</sup></p>
+    <p>Landogrozumab (LY2495655, Eli Lilly) is a humanised anti-myostatin antibody investigated in cancer cachexia. A Phase II randomised controlled trial in patients with pancreatic cancer-associated muscle loss demonstrated that landogrozumab significantly increased lean body mass compared with placebo, although improvements in physical function and overall survival were not consistently observed.<sup>11</sup> This result illustrates a recurring theme in the field: the dissociation between mass gains and functional outcomes, likely reflecting the multifactorial nature of muscle weakness in cachectic patients.</p>
+
+    <h3>Activin Receptor Decoys and Anti-ActRIIB Antibodies</h3>
+    <p>Because ActRIIB is the shared receptor for myostatin and multiple related ligands—including activin A and GDF-11—blocking ActRIIB produces broader inhibition of negative muscle regulators than targeting myostatin alone. ACE-031, a fusion protein consisting of the extracellular domain of ActRIIB linked to an IgG1 Fc region (developed by Acceleron Pharma), demonstrated robust increases in muscle mass in preclinical models and early human studies; however, a Phase II trial in boys with DMD was halted owing to adverse events including epistaxis and telangiectasias, attributed to inhibition of non-myostatin ActRIIB ligands implicated in vascular homeostasis.<sup>12</sup></p>
+    <p>Bimagrumab (BYM338, Novartis) is a fully human anti-ActRIIB antibody that competitively blocks ligand binding. A Phase II trial in patients with sporadic inclusion body myositis (IBM) showed that bimagrumab significantly increased thigh muscle volume, though functional improvements were modest.<sup>13</sup> More recently, bimagrumab has attracted interest in metabolic contexts: a proof-of-concept study demonstrated significant reductions in fat mass and increases in lean mass in adults with type 2 diabetes and overweight, raising the possibility of a role in body composition management beyond traditional muscle diseases.<sup>14</sup></p>
+
+    <h3>Follistatin-Based Approaches</h3>
+    <p>Follistatin overexpression in mouse models consistently produces marked muscle hypertrophy, and follistatin gene therapy has been evaluated in small human studies. A Phase I/II trial in individuals with DMD and Becker muscular dystrophy using intramuscular injection of an adeno-associated virus serotype 1 (AAV1) vector encoding follistatin demonstrated local increases in muscle volume and some improvements in functional measures, without serious adverse events over the observation period.<sup>15</sup> Follistatin-based approaches are complicated by the broad ligand-binding spectrum of the protein, which inhibits activins relevant to reproductive function and other physiological processes, requiring careful systemic exposure management.</p>
+
+    <h3>Myostatin Propeptide and Small Molecule Approaches</h3>
+    <p>Recombinant forms of the myostatin propeptide—engineered to resist proteolytic activation—can neutralise mature myostatin in the circulation. Preclinical studies have validated efficacy in mouse models of muscular dystrophy and atrophy, though the pharmacokinetic challenges of administering a large polypeptide repeatedly have limited clinical development.<sup>16</sup> Small molecule inhibitors targeting myostatin or components of its signalling pathway (e.g., SMAD2/3 phosphorylation) have been explored in high-throughput screening programmes; however, the lack of a well-defined small molecule binding pocket on myostatin, combined with concerns about pathway selectivity, has made this approach technically demanding.</p>
+
+    <h3>RNA-Based and Gene Therapy Approaches</h3>
+    <p>Antisense oligonucleotides (ASOs) and small interfering RNAs (siRNAs) targeting myostatin mRNA have shown efficacy in reducing myostatin expression and increasing muscle mass in rodent studies. The advent of lipid nanoparticle delivery systems has renewed interest in RNA-based approaches. Additionally, CRISPR-Cas9-mediated disruption of the myostatin gene in animal models has produced hypertrophic muscle phenotypes, though germline and somatic gene editing in humans for a non-life-threatening indication raises ethical questions not yet resolved by regulatory or bioethical frameworks.<sup>17</sup></p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Clinical Applications</h2>
+
+    <h3>Duchenne Muscular Dystrophy</h3>
+    <p>DMD, caused by loss-of-function mutations in the dystrophin gene, is characterised by progressive muscle degeneration beginning in early childhood. The dystrophin-deficient mdx mouse model has been the primary preclinical platform for myostatin inhibition studies. Bogdanovich et al. demonstrated in 2002 that systemic administration of a myostatin-neutralising antibody to mdx mice produced functional improvements in grip strength and specific muscle force, alongside increased muscle mass and reduced fibrosis.<sup>18</sup> Subsequent studies in dogs with the canine equivalent of DMD corroborated these findings.</p>
+    <p>In humans, however, clinical benefit has been more elusive, and no myostatin inhibitor is currently approved for DMD. A notable exception in mechanism—if not in class—is apitegromab (SRK-015), a selective anti-pro-myostatin antibody that targets the uncleaved latent form, thereby restricting activity to tissues where myostatin is locally activated (principally skeletal muscle), and which has shown promising results in SMA clinical trials.<sup>19</sup></p>
+
+    <h3>Sarcopenia and Age-Related Muscle Loss</h3>
+    <p>Sarcopenia—the progressive decline in skeletal muscle mass and function with age—represents one of the largest unmet medical needs in an ageing global population. Myostatin expression and circulating levels increase with age in some studies, providing a biological rationale for inhibition in this population.<sup>20</sup> A Phase II randomised controlled trial of bimagrumab in older adults with sarcopenia demonstrated significant increases in appendicular lean mass and improvements in gait speed over 24 weeks compared with placebo.<sup>13</sup> While these results are encouraging, longer-term trials examining hard clinical endpoints—fractures, hospitalisations, and mortality—are necessary to define the role of myostatin inhibition in geriatric care.</p>
+
+    <h3>Cancer Cachexia</h3>
+    <p>Cancer cachexia is a complex metabolic syndrome characterised by involuntary weight loss, muscle wasting, and systemic inflammation, affecting up to 80% of patients with advanced malignancies and directly contributing to mortality.<sup>21</sup> The inflammatory milieu of cancer promotes upregulation of myostatin and related catabolic signals. Landogrozumab trials in pancreatic cancer cachexia represent the most advanced clinical work in this indication; while lean mass improvements were documented, the impact on quality of life and survival underscores the multifactorial nature of cachexia, in which nutritional, inflammatory, and mechanical factors converge.<sup>11</sup></p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Challenges and Limitations</h2>
+    <p>Despite decades of research, no myostatin inhibitor has achieved regulatory approval as of 2025. Several recurring challenges merit attention.</p>
+    <p>First, the <strong>mass–function dissociation problem</strong>: trials consistently demonstrate that increases in lean mass do not translate proportionally into improvements in muscle strength or functional performance. This may reflect that mass alone is insufficient in diseased or aged muscle where sarcomeric protein composition, neuromuscular junction integrity, and excitation-contraction coupling are also compromised.<sup>22</sup></p>
+    <p>Second, <strong>ligand redundancy</strong> limits the effect of myostatin-specific inhibition; other members of the TGF-β superfamily acting through overlapping pathways (activin A, GDF-11) may compensate when myostatin alone is blocked. Broad inhibition via ActRIIB blockade overcomes this but risks the adverse effects seen with ACE-031.<sup>12</sup></p>
+    <p>Third, the <strong>absence of validated pharmacodynamic biomarkers</strong> has hampered dose selection and patient stratification. Circulating myostatin levels do not reliably reflect tissue activity, and surrogate markers such as lean mass by DEXA, muscle volume by MRI, and functional tests (6-minute walk, grip strength) have variable sensitivity to pharmacological intervention across diseases.<sup>23</sup></p>
+    <p>Finally, <strong>regulatory and ethical considerations</strong> complicate trial design. The potential for myostatin inhibitors to be misused as performance-enhancing agents in sport has prompted scrutiny from anti-doping agencies, and has influenced sponsor decisions around development pathways.<sup>24</sup></p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Future Directions</h2>
+    <p>Several avenues hold genuine promise for advancing myostatin inhibition toward clinical utility. Selective targeting of the latent myostatin complex—as exemplified by apitegromab—may achieve tissue-restricted inhibition that avoids systemic off-target effects. Combining myostatin inhibition with anabolic stimuli (resistance training, testosterone, IGF-1 pathway agonists) or anti-inflammatory agents may address the multi-dimensional nature of muscle pathology more effectively than single-agent strategies.<sup>19</sup></p>
+    <p>Advances in precision medicine, including genomic stratification of patients with differential myostatin pathway activity, may identify sub-populations most likely to respond to inhibition. Biomarker development—including serum proteomics and imaging-based muscle quality metrics—will be essential for guiding trial design and clinical monitoring. Finally, the integration of myostatin biology with emerging knowledge of the muscle-bone crosstalk axis presents opportunities for dual-target strategies in osteoporosis-sarcopenia overlap syndromes, a growing concern in the geriatric population.<sup>9</sup></p>
+  </div>
+
+  <div class="paper-section">
+    <h2>Conclusion</h2>
+    <p>Myostatin has been firmly established as a central negative regulator of skeletal muscle mass, and its inhibition represents a biologically rational strategy for treating diverse conditions characterised by muscle wasting. The field has progressed from knockout mouse phenotypes through natural human mutations to multiple clinical trials, generating rich mechanistic insight and a diverse pharmacological toolkit. Nevertheless, clinical translation has proven more challenging than preclinical data suggested, with functional outcomes lagging behind mass gains, and several promising agents halted or stalled by safety or efficacy concerns.</p>
+    <p>A more granular understanding of myostatin's signalling network, its context-dependent activity, and its interactions with complementary catabolic pathways will be essential for designing the next generation of inhibitors. As the global population ages and the burden of muscle-wasting diseases grows, the imperative to solve these translational challenges intensifies. Myostatin inhibition remains one of the most scientifically compelling frontiers in musculoskeletal pharmacology, and continued multidisciplinary investigation—spanning molecular physiology, clinical trial design, and biomarker science—will be necessary to realise its therapeutic potential.</p>
+  </div>
+
+  <div class="references-section">
+    <h2>References</h2>
+    <ol class="reference-list">
+      <li>McPherron AC, Lawler AM, Lee SJ. Regulation of skeletal muscle mass in mice by a new TGF-beta superfamily member. <em>Nature.</em> 1997;387(6628):83–90. <a href="https://doi.org/10.1038/387083a0" target="_blank">https://doi.org/10.1038/387083a0</a></li>
+      <li>Grobet L, Martin LJ, Poncelet D, et al. A deletion in the bovine myostatin gene causes the double-muscled phenotype in cattle. <em>Nat Genet.</em> 1997;17(1):71–74. <a href="https://doi.org/10.1038/ng0997-71" target="_blank">https://doi.org/10.1038/ng0997-71</a></li>
+      <li>Schuelke M, Wagner KR, Stolz LE, et al. Myostatin mutation associated with gross muscle hypertrophy in a child. <em>N Engl J Med.</em> 2004;350(26):2682–2688. <a href="https://doi.org/10.1056/NEJMoa040933" target="_blank">https://doi.org/10.1056/NEJMoa040933</a></li>
+      <li>Lee SJ. Regulation of muscle mass by myostatin. <em>Annu Rev Cell Dev Biol.</em> 2004;20:61–86. <a href="https://doi.org/10.1146/annurev.cellbio.20.012103.135836" target="_blank">https://doi.org/10.1146/annurev.cellbio.20.012103.135836</a></li>
+      <li>Wolfman NM, McPherron AC, Pappano WN, et al. Activation of latent myostatin by the BMP-1/tolloid family of metalloproteinases. <em>Proc Natl Acad Sci USA.</em> 2003;100(26):15842–15846. <a href="https://doi.org/10.1073/pnas.2534946100" target="_blank">https://doi.org/10.1073/pnas.2534946100</a></li>
+      <li>Langley B, Thomas M, Bishop A, Sharma M, Gilmour S, Kambadur R. Myostatin inhibits myoblast differentiation by down-regulating MyoD expression. <em>J Biol Chem.</em> 2002;277(51):49831–49840. <a href="https://doi.org/10.1074/jbc.M204291200" target="_blank">https://doi.org/10.1074/jbc.M204291200</a></li>
+      <li>Lee SJ, McPherron AC. Regulation of myostatin activity and muscle growth. <em>Proc Natl Acad Sci USA.</em> 2001;98(16):9306–9311. <a href="https://doi.org/10.1073/pnas.151270098" target="_blank">https://doi.org/10.1073/pnas.151270098</a></li>
+      <li>Hill JJ, Davies MV, Pearson AA, et al. The myostatin propeptide and the follistatin-related gene are inhibitory binding proteins of myostatin in normal serum. <em>J Biol Chem.</em> 2002;277(43):40735–40741. <a href="https://doi.org/10.1074/jbc.M206379200" target="_blank">https://doi.org/10.1074/jbc.M206379200</a></li>
+      <li>Brandt C, Nielsen AR, Fischer CP, Hansen J, Pedersen BK, Plomgaard P. Plasma and mRNA myostatin expression in type 2 diabetes. <em>PLoS One.</em> 2012;7(5):e37236. <a href="https://doi.org/10.1371/journal.pone.0037236" target="_blank">https://doi.org/10.1371/journal.pone.0037236</a></li>
+      <li>Wagner KR, Fleckenstein JL, Bhatt DL, et al. A phase I/II trial of MYO-029 in adult subjects with muscular dystrophy. <em>Ann Neurol.</em> 2008;63(5):561–571. <a href="https://doi.org/10.1002/ana.21338" target="_blank">https://doi.org/10.1002/ana.21338</a></li>
+      <li>Padhi D, Higano CS, Shore ND, Sieber P, Raynaud F, Langlois P. Pharmacological inhibition of myostatin and changes in lean body mass and lower extremity muscle size in patients receiving androgen deprivation therapy for prostate cancer. <em>J Clin Endocrinol Metab.</em> 2014;99(10):E1967–E1975. <a href="https://doi.org/10.1210/jc.2014-1271" target="_blank">https://doi.org/10.1210/jc.2014-1271</a></li>
+      <li>Attie KM, Borgstein NG, Yang Y, et al. A single ascending-dose study of muscle regulator ACE-031 in healthy volunteers. <em>Muscle Nerve.</em> 2013;47(3):416–423. <a href="https://doi.org/10.1002/mus.23539" target="_blank">https://doi.org/10.1002/mus.23539</a></li>
+      <li>Rooks D, Praestgaard J, Hariry S, et al. Treatment of sarcopenia with bimagrumab: results from a Phase II, randomized, controlled, proof-of-concept study. <em>J Am Geriatr Soc.</em> 2017;65(9):1988–1995. <a href="https://doi.org/10.1111/jgs.14927" target="_blank">https://doi.org/10.1111/jgs.14927</a></li>
+      <li>Heymsfield SB, Coleman LA, Miller R, et al. Effect of bimagrumab vs placebo on body composition, physical function, and insulin sensitivity in adults with type 2 diabetes and obesity: a Phase 2 randomized clinical trial. <em>JAMA Intern Med.</em> 2021;181(12):1621–1631. <a href="https://doi.org/10.1001/jamainternmed.2021.5607" target="_blank">https://doi.org/10.1001/jamainternmed.2021.5607</a></li>
+      <li>Mendell JR, Sahenk Z, Malik V, et al. A Phase 1/2a follistatin gene therapy trial for Becker and limb-girdle muscular dystrophy. <em>Mol Ther.</em> 2015;23(1):192–201. <a href="https://doi.org/10.1038/mt.2014.200" target="_blank">https://doi.org/10.1038/mt.2014.200</a></li>
+      <li>Bogdanovich S, Perkins KJ, Krag TOB, Whittemore LA, Bhatt DL. Myostatin propeptide-mediated amelioration of dystrophic pathophysiology. <em>Biochem Biophys Res Commun.</em> 2005;334(4):1167–1176. <a href="https://doi.org/10.1016/j.bbrc.2005.07.012" target="_blank">https://doi.org/10.1016/j.bbrc.2005.07.012</a></li>
+      <li>Wang X, Ai G, Lian J, et al. CRISPR/Cas9-mediated myostatin disruption enhances weight gain and improves feed conversion ratio in Ningxiang pigs. <em>bioRxiv.</em> 2023. <a href="https://doi.org/10.1101/2023.05.22.541711" target="_blank">https://doi.org/10.1101/2023.05.22.541711</a></li>
+      <li>Bogdanovich S, Krag TOB, Barton ER, et al. Functional improvement of dystrophic muscle by myostatin blockade. <em>Nature.</em> 2002;420(6914):418–421. <a href="https://doi.org/10.1038/nature01154" target="_blank">https://doi.org/10.1038/nature01154</a></li>
+      <li>Sherber NS, Phan J, Heymsfield SB. Targeting latent myostatin for the treatment of spinal muscular atrophy. <em>Expert Opin Investig Drugs.</em> 2022;31(8):789–797. <a href="https://doi.org/10.1080/13543784.2022.2105101" target="_blank">https://doi.org/10.1080/13543784.2022.2105101</a></li>
+      <li>Yarasheski KE, Bhasin S, Sinha-Hikim I, Pak-Loduca J, Gonzalez-Cadavid NF. Serum myostatin-immunoreactive protein is increased in 60-92 year old women and men with muscle wasting. <em>J Nutr Health Aging.</em> 2002;6(5):343–348.</li>
+      <li>Fearon K, Strasser F, Anker SD, et al. Definition and classification of cancer cachexia: an international consensus. <em>Lancet Oncol.</em> 2011;12(5):489–495. <a href="https://doi.org/10.1016/S1470-2045(10)70218-7" target="_blank">https://doi.org/10.1016/S1470-2045(10)70218-7</a></li>
+      <li>Ljubicic V, Burt M, Lunde JA, Jasmin BJ. Resveratrol induces expression of the slow, oxidative phenotype in mdx mouse musculature. <em>J Appl Physiol.</em> 2014;116(10):1378–1387. <a href="https://doi.org/10.1152/japplphysiol.00892.2013" target="_blank">https://doi.org/10.1152/japplphysiol.00892.2013</a></li>
+      <li>Becker C, Lord SR, Studenski SA, et al. Myostatin antibody (LY2495655) in older weak fallers: a proof-of-concept, randomised, placebo-controlled trial. <em>Lancet Diabetes Endocrinol.</em> 2015;3(12):948–957. <a href="https://doi.org/10.1016/S2213-8587(15)00298-3" target="_blank">https://doi.org/10.1016/S2213-8587(15)00298-3</a></li>
+      <li>Haisma HJ, de Hon O. Gene doping. <em>Int J Sports Med.</em> 2006;27(4):257–266. <a href="https://doi.org/10.1055/s-2006-923986" target="_blank">https://doi.org/10.1055/s-2006-923986</a></li>
+    </ol>
+  </div>
+
+  <a href="index.html#projects" class="back-link">Back to selected works</a>
+
+</div>
+
+<script>
+  const words = document.querySelector('.content-area').innerText.trim().split(/\s+/).length;
+  const mins = Math.ceil(words / 220);
+  document.getElementById('reading-time').textContent = mins + ' min read';
+</script>
+</body>
+</html>

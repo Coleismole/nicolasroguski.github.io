@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /health
+Disallow: /api/
+Disallow: /analytics.json
+
+Allow: /
