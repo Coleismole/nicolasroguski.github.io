@@ -34,6 +34,7 @@ app.use(compression());
 
 // ── Body parsing with size limit ──────────────────────────────────────────────
 app.use(express.json({ limit: '10kb' }));
+app.use('/api/analytics', express.text({ type: 'text/plain', limit: '10kb' }));
 
 // ── CORS — restrict API access to same origin ─────────────────────────────────
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || null;
@@ -53,8 +54,13 @@ app.use((req, res, next) => {
 
 // ── Security headers ──────────────────────────────────────────────────────────
 app.use((req, res, next) => {
+  const host = req.get('host') || '';
+  const isPortForwardPreview = /(^localhost(?::|$)|^127\.0\.0\.1(?::|$)|\.github\.dev$|\.replit\.dev$)/.test(host);
+
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  if (!isPortForwardPreview) {
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  }
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   res.setHeader('Content-Security-Policy', [
@@ -255,6 +261,22 @@ function requireAdmin(req, res, next) {
 }
 
 // ── Input validation middleware ───────────────────────────────────────────────
+function normalizeAnalyticsPayload(req, res, next) {
+  if (typeof req.body === 'string') {
+    try {
+      req.body = JSON.parse(req.body);
+    } catch {
+      return res.status(400).json({ error: 'Invalid analytics JSON' });
+    }
+  }
+
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    req.body = {};
+  }
+
+  next();
+}
+
 function validateAnalyticsPayload(req, res, next) {
   const { path: pth, url, sessionId, referrer } = req.body || {};
 
@@ -367,7 +389,7 @@ function getCachedStats(views) {
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
-app.post('/api/analytics', analyticsLimiter, validateAnalyticsPayload, async (req, res) => {
+app.post('/api/analytics', analyticsLimiter, normalizeAnalyticsPayload, validateAnalyticsPayload, async (req, res) => {
   try {
     const analytics = await loadAnalytics();
     const payload = req.body;

@@ -142,7 +142,9 @@ npm start
 - Stats are cached in memory for 30 seconds to avoid recomputing on every request.
 - Access the dashboard at `/admin?token=YOUR_TOKEN` (set `ADMIN_TOKEN` env var first).
  
-Client-side analytics now prefers `navigator.sendBeacon` and uses `keepalive` fetch as a fallback, reducing the chance of lost events during unload. Analytics remains privacy-first (no cookies, no personal identifiers).
+Client-side analytics prefers `navigator.sendBeacon` and sends beacons as an `application/json` `Blob`, with `keepalive` fetch as a fallback. The server also accepts legacy `text/plain` beacon payloads, so cached clients do not fail if they send the older beacon format.
+
+The initial page load is counted once, and re-engagement events are throttled to one view per 30 minutes per open tab. Normal page exits are no longer counted as a second page view.
 
 ---
 
@@ -175,6 +177,7 @@ Run `npm run build` to regenerate `nicolas-photo.webp` if the source image chang
 - **Service worker** — Pre-caches key assets; cache-first for static files, network-first for HTML; offline fallback page
 - **PWA manifest** — `manifest.json` is included and linked in `index.html` for basic installability and theme color support
 - **Service worker improvements** — runtime cache with stale-while-revalidate behavior and automatic trimming of old runtime entries
+- **Motion fallback** — The main page reveals immediately and falls back to static behavior if GSAP, ScrollTrigger, ScrollToPlugin, or Lenis fail to load
 
 ---
 
@@ -184,6 +187,7 @@ Run `npm run build` to regenerate `nicolas-photo.webp` if the source image chang
 - **Rate limiting** — Analytics API: 30 req/min; stats/admin API: 20 req/min
 - **Blocked paths** — `analytics.json` and zip files return 403
 - **Security headers** — `X-Content-Type-Options`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy`, `Permissions-Policy`
+- **Port-forward previews** — `X-Frame-Options` is skipped for localhost, `127.0.0.1`, `*.github.dev`, and `*.replit.dev` hosts so IDE/Codespaces/Replit previews can render the site instead of showing a blank iframe
 - **Admin auth** — Token-based, checked on all admin routes
 
 ---

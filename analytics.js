@@ -1,7 +1,7 @@
 // Privacy-first analytics - no cookies, no personal data, no tracking pixels
 (function() {
   const sessionId = Math.random().toString(36).substring(2, 15);
-  let lastSent = Date.now();
+  let lastSent = 0;
   const COOLDOWN_MS = 30 * 60 * 1000; // 30 minutes — prevents tab-switching from inflating counts
 
   // Small buffer to batch events if needed in future
@@ -35,7 +35,8 @@
     // Prefer sendBeacon for unload/visibility events
     if (navigator.sendBeacon) {
       try {
-        const ok = navigator.sendBeacon('/api/analytics', JSON.stringify(data));
+        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const ok = navigator.sendBeacon('/api/analytics', blob);
         if (ok) return;
       } catch (e) {
         // fallthrough to fetch
@@ -59,9 +60,10 @@
     }
   });
 
-  // Also send a beacon on pagehide (covers unload in modern browsers)
+  // Record a late page load only if the initial beacon did not run.
   window.addEventListener('pagehide', () => {
-    try { navigator.sendBeacon && navigator.sendBeacon('/api/analytics', JSON.stringify(payload())); }
-    catch (e) {}
+    if (document.visibilityState === 'hidden' && lastSent === 0) {
+      sendAnalytics();
+    }
   }, { capture: true });
 })();

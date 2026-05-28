@@ -494,6 +494,53 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" crossorigin="anonymous"></script>
 
 <script>
+document.body.classList.add('loaded');
+
+// Keep the site visible if forwarded previews or blockers fail to load motion CDNs.
+(function installMotionFallback() {
+  if (window.gsap && window.ScrollTrigger && window.ScrollToPlugin && window.Lenis) return;
+
+  const loader = document.getElementById('loader');
+  if (loader) loader.style.display = 'none';
+  console.warn('Motion libraries unavailable; using static fallback.');
+
+  const noop = () => {};
+  const chain = { from: () => chain, to: () => chain, fromTo: () => chain };
+
+  window.ScrollTrigger = window.ScrollTrigger || {
+    update: noop,
+    refresh: noop,
+    create: () => ({ kill: noop })
+  };
+
+  window.ScrollToPlugin = window.ScrollToPlugin || {};
+
+  window.gsap = window.gsap || {
+    registerPlugin: noop,
+    ticker: { add: noop, lagSmoothing: noop },
+    timeline: () => chain,
+    from: noop,
+    to: noop,
+    fromTo: noop,
+    matchMedia: () => ({ add: noop }),
+    utils: { toArray: selector => Array.from(document.querySelectorAll(selector)) }
+  };
+
+  window.Lenis = window.Lenis || class {
+    on() {}
+    raf() {}
+    scrollTo(target) {
+      if (target === 0) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    stop() {}
+    start() {}
+  };
+})();
+
 // ── GSAP + Lenis setup ────────────────────────────────────────────────────────
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -525,7 +572,6 @@ darkToggle.addEventListener('click', () => {
 });
 
 // ── Page load reveal ───────────────────────────────────────────────────────────
-document.body.classList.add('loaded');
 window.addEventListener('pageshow', (e) => {
   document.getElementById('page-overlay').classList.remove('active');
   document.body.classList.add('loaded');
