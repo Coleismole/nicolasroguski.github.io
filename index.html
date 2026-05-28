@@ -434,12 +434,12 @@
     </div>
   </div>
   <div class="contact-right">
-    <form class="contact-form" onsubmit="handleSubmit(event)">
+    <form class="contact-form" id="contact-form">
       <input type="text" name="name" placeholder="Your name" required>
       <input type="email" name="email" placeholder="Your email" required>
       <input type="text" name="subject" placeholder="Subject">
       <textarea name="message" placeholder="Your message..."></textarea>
-      <button type="submit" class="btn btn-gold">Send message</button>
+      <button type="button" id="contact-send" class="btn btn-gold">Send message</button>
     </form>
   </div>
 </section>
@@ -1015,6 +1015,25 @@ async function handleSubmit(e) {
     setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
   }
 }
+
+// Wire explicit Send button and prevent Enter from auto-submitting
+(() => {
+  const form = document.getElementById('contact-form');
+  const sendBtn = document.getElementById('contact-send');
+  if (!form || !sendBtn) return;
+
+  // Prevent Enter in non-textarea fields from submitting the form
+  form.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && ev.target && ev.target.tagName !== 'TEXTAREA') {
+      ev.preventDefault();
+    }
+  });
+
+  sendBtn.addEventListener('click', () => {
+    // Call handleSubmit with a synthetic event object carrying the form as target
+    handleSubmit({ preventDefault: () => {}, target: form });
+  });
+})();
 </script>
 <script>
 if ('serviceWorker' in navigator) {
