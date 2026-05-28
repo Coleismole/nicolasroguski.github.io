@@ -66,7 +66,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(5.5rem, 12vw, 10rem);
   font-weight: 300;
-  color: var(--cream);
+  color: var(--ink);
   letter-spacing: -0.03em;
   line-height: 1;
   display: block;
