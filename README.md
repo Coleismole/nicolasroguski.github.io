@@ -111,6 +111,8 @@ Set these as Replit Secrets (environment variables) — never hardcode them.
 - Maximum 10,000 entries stored; older entries are pruned automatically.
 - Stats are cached in memory for 30 seconds to avoid recomputing on every request.
 - Access the dashboard at `/admin?token=YOUR_TOKEN` (set `ADMIN_TOKEN` env var first).
+ 
+Client-side analytics now prefers `navigator.sendBeacon` and uses `keepalive` fetch as a fallback, reducing the chance of lost events during unload. Analytics remains privacy-first (no cookies, no personal identifiers).
 
 ---
 
@@ -141,6 +143,8 @@ Run `npm run build` to regenerate `nicolas-photo.webp` if the source image chang
 - **Smart cache headers** — `immutable` for versioned assets, `no-cache` for HTML, 30-day for images
 - **Asset preloading** — `<link rel="preload">` for hero image and CSS in `<head>`
 - **Service worker** — Pre-caches key assets; cache-first for static files, network-first for HTML; offline fallback page
+- **PWA manifest** — `manifest.json` is included and linked in `index.html` for basic installability and theme color support
+- **Service worker improvements** — runtime cache with stale-while-revalidate behavior and automatic trimming of old runtime entries
 
 ---
 
@@ -200,3 +204,8 @@ After deploying:
 | `styles.css` | All styling — edit this, not `.min.css` |
 | `build.js` | Asset pipeline — image conversion + CSS minification |
 | `sw.js` | Service worker — update `PRECACHE` when adding pages/assets |
+
+## Notes
+
+- `.gitignore` now excludes common local artifacts such as `lh-report.*`, `.cache/`, and possible local Chromium folders so generated audit reports and local caches won't be committed.
+- Consider adding SRI hashes for CDN scripts (`gsap`, `lenis`) if you want stricter integrity checks.

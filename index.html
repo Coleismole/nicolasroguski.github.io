@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nicolas Roguski — Biomedical Physiology Student</title>
 <meta name="description" content="Nicolas Roguski is a Biomedical Physiology student at Simon Fraser University, passionate about bridging foundational science with real-world health applications. Open to research opportunities.">
+<meta name="theme-color" content="#f7f4ef">
 <link rel="canonical" href="https://nicolas-roguski.replit.app/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:title" content="Nicolas Roguski — Biomedical Physiology Student">
@@ -21,11 +22,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<!-- Preload Google Fonts stylesheet and apply onload to avoid render-blocking -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="preload" href="nicolas-photo.webp" as="image" type="image/webp">
 <link rel="preload" href="styles.min.css?v=5" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.min.css?v=5">
 <script src="analytics.js" defer></script>
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -66,6 +71,8 @@
 </script>
 </head>
 <body>
+
+<a class="skip-link" href="#about" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
 <!-- LOADER -->
 <div id="loader">
@@ -162,7 +169,7 @@
     <div class="hero-photo-wrap">
       <picture>
       <source srcset="nicolas-photo.webp" type="image/webp">
-      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" fetchpriority="high" onload="this.classList.add('loaded')">
+      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" fetchpriority="high" loading="eager" width="720" height="960" style="aspect-ratio:3/4;" onload="this.classList.add('loaded')">
     </picture>
     </div>
   </div>
@@ -468,10 +475,10 @@
 </footer>
 
 <!-- GSAP + ScrollTrigger + Lenis -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" crossorigin="anonymous"></script>
 
 <script>
 // ── GSAP + Lenis setup ────────────────────────────────────────────────────────

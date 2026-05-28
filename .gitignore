@@ -34,6 +34,20 @@ coverage/
 # Runtime data
 analytics.json
 
+# Local dev / CI artifacts
+lh-report.*
+.cache/
+
+# Puppeteer / local Chromium downloads (may be stored outside repo but ignore common names)
+chrome-linux*/
+local-chrome*/
+
+# Editor swap / temp files
+*.swp
+*.swo
+*~
+Thumbs.db
+
 # Optional: lockfiles (uncomment if you don't want to commit lockfiles)
 # package-lock.json
 # yarn.lock
