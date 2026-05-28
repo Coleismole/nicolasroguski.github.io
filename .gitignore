@@ -48,6 +48,9 @@ local-chrome*/
 *~
 Thumbs.db
 
+# Large attachments / backups
+/attached_assets/
+
 # Optional: lockfiles (uncomment if you don't want to commit lockfiles)
 # package-lock.json
 # yarn.lock
