@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Offline · Nicolas Roguski</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #f7f4ef; --navy: #1c2a4a; --gold: #c4782a; --muted: #6b6b60; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+  .logo { font-size: 1rem; letter-spacing: 0.08em; opacity: 0.5; margin-bottom: 3rem; }
+  .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
+  .line { width: 40px; height: 2px; background: var(--gold); margin: 1.25rem auto; }
+  h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 400; font-style: italic; margin-bottom: 0.75rem; }
+  p { font-family: system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); font-weight: 300; max-width: 340px; line-height: 1.65; margin-bottom: 2rem; }
+  button {
+    padding: 0.75rem 2rem;
+    background: var(--navy);
+    color: var(--bg);
+    border: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+  }
+  button:hover { background: #2d3f63; }
+  .footer { position: fixed; bottom: 1.75rem; font-size: 0.75rem; color: var(--muted); font-family: system-ui, sans-serif; }
+</style>
+</head>
+<body>
+  <p class="logo">N. Roguski</p>
+  <div class="icon">◎</div>
+  <div class="line"></div>
+  <h1>You're offline.</h1>
+  <p>It looks like you've lost your internet connection. Please reconnect and try again.</p>
+  <button onclick="window.location.reload()">Try again →</button>
+  <p class="footer">Biomedical Physiology · SFU</p>
+</body>
+</html>

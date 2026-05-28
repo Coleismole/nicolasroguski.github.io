@@ -1075,6 +1075,27 @@ html.dark .skill-bar-track { background: rgba(255,255,255,0.07); }
 }
 #back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
 #back-to-top:hover { background: var(--sage-light); }
+.btt-ring {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.btt-ring-track {
+  fill: none;
+  stroke: rgba(196, 120, 42, 0.2);
+  stroke-width: 2;
+}
+.btt-ring-fill {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: butt;
+  transition: stroke-dashoffset 80ms linear;
+}
+.btt-arrow { position: relative; z-index: 1; }
 
 /* ── COPY TOAST ── */
 #copy-toast {

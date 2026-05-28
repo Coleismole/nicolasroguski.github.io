@@ -425,7 +425,13 @@
 </section>
 
 
-<button id="back-to-top" aria-label="Back to top">↑</button>
+<button id="back-to-top" aria-label="Back to top">
+  <svg class="btt-ring" viewBox="0 0 44 44" aria-hidden="true">
+    <circle class="btt-ring-track" cx="22" cy="22" r="18"/>
+    <circle class="btt-ring-fill" id="btt-ring-fill" cx="22" cy="22" r="18"/>
+  </svg>
+  <span class="btt-arrow">↑</span>
+</button>
 
 <!-- AVAILABILITY BADGE -->
 <div id="availability-badge">
@@ -476,10 +482,21 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-// ── Dark mode (run before paint) ───────────────────────────────────────────────
+// ── Dark mode (system preference + manual toggle) ──────────────────────────────
 const html = document.documentElement;
 const darkToggle = document.getElementById('dark-toggle');
-if (localStorage.getItem('dark') === '1') { html.classList.add('dark'); darkToggle.textContent = '○'; }
+const savedDark = localStorage.getItem('dark');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (savedDark === '1' || (savedDark === null && prefersDark)) {
+  html.classList.add('dark');
+  darkToggle.textContent = '○';
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (localStorage.getItem('dark') === null) {
+    html.classList.toggle('dark', e.matches);
+    darkToggle.textContent = e.matches ? '○' : '☽';
+  }
+});
 darkToggle.addEventListener('click', () => {
   html.classList.toggle('dark');
   const on = html.classList.contains('dark');
@@ -572,12 +589,16 @@ ScrollTrigger.create({
   onLeaveBack: () => document.getElementById('main-nav').classList.remove('scrolled')
 });
 
-// ── Scroll progress bar ────────────────────────────────────────────────────────
+// ── Scroll progress bar + back-to-top ring ────────────────────────────────────
 const progressBar = document.getElementById('scroll-progress');
 const backToTop = document.getElementById('back-to-top');
+const ringFill = document.getElementById('btt-ring-fill');
+const RING_CIRC = 2 * Math.PI * 18;
+if (ringFill) { ringFill.style.strokeDasharray = RING_CIRC; ringFill.style.strokeDashoffset = RING_CIRC; }
 lenis.on('scroll', ({ progress }) => {
   progressBar.style.width = (progress * 100) + '%';
   backToTop.classList.toggle('visible', progress > 0.12);
+  if (ringFill) ringFill.style.strokeDashoffset = RING_CIRC * (1 - progress);
 });
 
 // ── Active nav highlight ───────────────────────────────────────────────────────
@@ -927,6 +948,13 @@ async function handleSubmit(e) {
     btn.textContent = 'Error — try again'; btn.disabled = false;
     setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
   }
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
 }
 </script>
 </body>
