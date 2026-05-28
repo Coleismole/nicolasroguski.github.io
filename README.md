@@ -41,7 +41,6 @@ npm start
 ├── subpage-styles.css          # Source CSS for research subpages
 ├── subpage-styles.min.css      # Minified subpage CSS — auto-generated
 ├── analytics.js                # Client-side privacy-first analytics script
-├── analytics.json              # Server-side page view storage (auto-created)
 ├── server.js                   # Express server — API, analytics, admin, static serving
 ├── build.js                    # Build script: image → WebP, CSS → minified
 ├── sw.js                       # Service worker — offline support + asset caching
@@ -141,6 +140,7 @@ npm start
 - Maximum 10,000 entries stored; older entries are pruned automatically.
 - Stats are cached in memory for 30 seconds to avoid recomputing on every request.
 - Access the dashboard at `/admin?token=YOUR_TOKEN` (set `ADMIN_TOKEN` env var first).
+- `analytics.json` is created at runtime and ignored by Git, so local/deployed page-view data does not get committed.
  
 Client-side analytics prefers `navigator.sendBeacon` and sends beacons as an `application/json` `Blob`, with `keepalive` fetch as a fallback. The server also accepts legacy `text/plain` beacon payloads, so cached clients do not fail if they send the older beacon format.
 
@@ -178,12 +178,13 @@ Run `npm run build` to regenerate `nicolas-photo.webp` if the source image chang
 - **PWA manifest** — `manifest.json` is included and linked in `index.html` for basic installability and theme color support
 - **Service worker improvements** — runtime cache with stale-while-revalidate behavior and automatic trimming of old runtime entries
 - **Motion fallback** — The main page reveals immediately and falls back to static behavior if GSAP, ScrollTrigger, ScrollToPlugin, or Lenis fail to load
+ - **Motion libraries** — The site now ships GSAP, ScrollTrigger, ScrollToPlugin, and Lenis under `vendor/` to avoid runtime CDN dependency; the static fallback remains if any library fails to initialise
 
 ---
 
 ## Security Features
 
-- **Content Security Policy** — Whitelists GSAP CDN, jsDelivr, Google Fonts, and Formspree; blocks everything else
+- **Content Security Policy** — `script-src` is restricted to the site itself; motion libraries are served locally from `vendor/` and a graceful CDN fallback is still present for emergency scenarios
 - **Rate limiting** — Analytics API: 30 req/min; stats/admin API: 20 req/min
 - **Blocked paths** — `analytics.json` and zip files return 403
 - **Security headers** — `X-Content-Type-Options`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy`, `Permissions-Policy`

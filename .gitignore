@@ -22,6 +22,9 @@ build/
 # Coverage and cache
 coverage/
 .cache/
+.nyc_output/
+.turbo/
+.vite/
 
 # OS / editor files
 .DS_Store
@@ -36,7 +39,12 @@ analytics.json
 
 # Local dev / CI artifacts
 lh-report.*
-.cache/
+playwright-report/
+test-results/
+screenshots/
+*.har
+.vercel/
+.netlify/
 
 # Puppeteer / local Chromium downloads (may be stored outside repo but ignore common names)
 chrome-linux*/

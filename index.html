@@ -21,7 +21,6 @@
 <meta name="twitter:image" content="/nicolas-photo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <!-- Preload Google Fonts stylesheet and apply onload to avoid render-blocking -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
@@ -31,7 +30,6 @@
 <link rel="stylesheet" href="styles.min.css?v=5">
 <script src="analytics.js" defer></script>
 <link rel="manifest" href="/manifest.json">
-<link rel="stylesheet" href="/scrollbar.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -487,11 +485,11 @@
   <p class="footer-copy">© 2026 · Biomedical Physiology · SFU</p>
 </footer>
 
-<!-- GSAP + ScrollTrigger + Lenis -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" crossorigin="anonymous"></script>
+<!-- GSAP + ScrollTrigger + Lenis (prefer local vendor files; CDN fallback remains) -->
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
 
 <script>
 document.body.classList.add('loaded');
