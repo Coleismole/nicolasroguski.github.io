@@ -499,8 +499,34 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ── Sitemap ───────────────────────────────────────────────────────────────────
+app.get('/sitemap.xml', (req, res) => {
+  const base = `${req.protocol}://${req.get('host')}`;
+  const now = new Date().toISOString().split('T')[0];
+  const pages = [
+    { loc: '/', priority: '1.0', changefreq: 'monthly' },
+    { loc: '/myostatin-inhibitors.html', priority: '0.8', changefreq: 'monthly' }
+  ];
+  const urls = pages.map(p => `
+  <url>
+    <loc>${base}${p.loc}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('');
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+</urlset>`);
+});
+
 // ── 404 handler ───────────────────────────────────────────────────────────────
 app.use((req, res) => {
+  const acceptsHtml = req.headers.accept && req.headers.accept.includes('text/html');
+  if (acceptsHtml) {
+    return res.status(404).sendFile(path.join(__dirname, '404.html'));
+  }
   res.status(404).json({ error: 'Not found', path: req.path });
 });
 
