@@ -1,18 +1,32 @@
 # Nicolas Roguski — Personal Portfolio
 
-A personal portfolio website for **Nicolas Roguski**, a Biomedical Physiology student at Simon Fraser University. Built with vanilla HTML/CSS/JS served by a Node.js + Express backend. No frontend build framework — assets are served directly.
+This is a small, dependency-light portfolio site for **Nicolas Roguski**. It uses plain HTML/CSS/JS and is served by a minimal Node.js + Express backend. No frontend framework required — static assets are served directly.
 
 ---
 
-## Quick Start
+## Prerequisites
+
+- Node.js (recommended >= 16) and `npm` installed
+- A modern browser (Chrome, Firefox, Edge, Safari)
+
+## Quick start (minimum)
+
+These commands get the site running locally in most environments:
 
 ```bash
-npm install        # install dependencies
-npm run build      # generate WebP image + minified CSS (required before first run)
-npm start          # start server on port 5000
+npm install          # install server dependencies
+npm run build        # convert images + minify CSS (recommended first run)
+npm start            # start the server (default: http://localhost:5000)
 ```
 
-Visit `http://localhost:5000` in your browser.
+Open your browser to `http://localhost:5000`.
+
+If you just want to preview without the build step (the repo already includes `.min.css` and `.webp`):
+
+```bash
+npm install
+npm start
+```
 
 ---
 
@@ -64,26 +78,42 @@ Visit `http://localhost:5000` in your browser.
 
 | Command | What it does |
 |---|---|
-| `npm start` | Start Express server on port 5000 |
+| `npm start` | Start the Express server on port 5000 |
 | `npm run build` | Convert hero image to WebP + minify all CSS files |
 
-Run `npm run build` any time you edit `styles.css` or `subpage-styles.css`. The server serves the `.min.css` files, not the source CSS.
+Run `npm run build` after editing `styles.css` or `subpage-styles.css`. The HTML references the `.min.css` files.
 
 ---
 
-## Environment Variables
+## Environment variables & local admin note
+
+The server supports a few environment variables:
 
 | Variable | Required | Description |
 |---|---|---|
-| `ADMIN_TOKEN` | Recommended | Password protecting `/admin` and `/api/analytics/stats`. If unset, those routes are public. |
-| `ALLOWED_ORIGIN` | Optional | Restricts CORS on API routes to a specific origin (e.g. `https://yoursite.com`). Defaults to permissive. |
-| `NODE_ENV` | Optional | Set to `production` to suppress stack traces in error responses. |
+| `ADMIN_TOKEN` | Recommended in production | Protects `/admin` and `/api/analytics/stats`. If unset, those admin routes are public.
+| `ALLOWED_ORIGIN` | Optional | Restricts API CORS to a specific origin (e.g. `https://yoursite.com`).
+| `NODE_ENV` | Optional | Set to `production` to suppress stack traces in error responses.
 
-Set these as Replit Secrets (environment variables) — never hardcode them.
+Important: For local testing this repository currently hardcodes a development admin token in `server.js` (`8208`). Do NOT use that value in production — instead set `ADMIN_TOKEN` as an environment variable or secret in your host (e.g., Replit Secrets, GitHub Actions, or your server environment).
+
+Example to run with a production token locally (recommended):
+
+```bash
+export ADMIN_TOKEN=your-secret-here
+npm start
+```
+
+On Windows (PowerShell):
+
+```powershell
+$env:ADMIN_TOKEN = 'your-secret-here'
+npm start
+```
 
 ---
 
-## Server Routes
+## Server routes
 
 ### Public
 | Method | Path | Description |
