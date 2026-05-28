@@ -1276,3 +1276,15 @@ html.dark .skill-bar-track { background: rgba(255,255,255,0.07); }
   .hero-cta { flex-direction: column; }
   .btn { text-align: center; }
 }
+
+/* Custom scrollbar - WebKit and Firefox */
+html { scrollbar-width: thin; scrollbar-color: var(--sage) var(--cream); }
+
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--sage-light), var(--sage));
+  border-radius: 999px;
+  border: 3px solid var(--cream);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--sage-light); }
