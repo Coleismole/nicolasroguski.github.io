@@ -5,18 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nicolas Roguski — Biomedical Physiology Student</title>
 <meta name="description" content="Nicolas Roguski is a Biomedical Physiology student at Simon Fraser University, passionate about bridging foundational science with real-world health applications. Open to research opportunities.">
+<link rel="canonical" href="https://nicolas-roguski.replit.app/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:title" content="Nicolas Roguski — Biomedical Physiology Student">
 <meta property="og:description" content="Bridging the science of medicine with compassionate patient care — one compound, one study, one breakthrough at a time.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://509740d6-e30b-4dad-b618-bb47acf9ca3a-00-125v2i2g5b50v.spock.replit.dev">
+<meta property="og:url" content="https://nicolas-roguski.replit.app/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nicolas Roguski — Biomedical Physiology Student">
 <meta name="twitter:description" content="Bridging the science of medicine with compassionate patient care — one compound, one study, one breakthrough at a time.">
+<meta property="og:image" content="/nicolas-photo.webp">
+<meta property="og:image:width" content="900">
+<meta property="og:image:type" content="image/webp">
+<meta name="twitter:image" content="/nicolas-photo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="nicolas-photo.webp" as="image" type="image/webp">
+<link rel="preload" href="styles.min.css?v=5" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.min.css?v=5">
 <script src="analytics.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Nicolas Roguski",
+  "url": "https://nicolas-roguski.replit.app/",
+  "image": "https://nicolas-roguski.replit.app/nicolas-photo.webp",
+  "jobTitle": "Biomedical Physiology Student",
+  "description": "Biomedical Physiology student at Simon Fraser University, passionate about bridging foundational science with real-world health applications. Open to research opportunities.",
+  "email": "coleroguski@gmail.com",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Simon Fraser University",
+    "url": "https://www.sfu.ca",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Burnaby",
+      "addressRegion": "BC",
+      "addressCountry": "CA"
+    }
+  },
+  "alumniOf": {
+    "@type": "HighSchool",
+    "name": "École Dr. Charles Best Secondary"
+  },
+  "knowsAbout": [
+    "Human Physiology",
+    "Biochemistry",
+    "Neuroscience",
+    "Anatomy",
+    "Pharmacology",
+    "Scientific Research"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/nicolas-ross-roguski-66028937b"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -98,7 +145,7 @@
     </div>
     <div class="hero-stat-strip">
       <div class="hero-stat">
-        <span class="hero-stat-num" data-count="4" data-suffix="+">4+</span>
+        <span class="hero-stat-num" data-count="1" data-suffix="">1</span>
         <span class="hero-stat-label">Years of study</span>
       </div>
       <div class="hero-stat">
@@ -113,7 +160,10 @@
   </div>
   <div class="hero-right">
     <div class="hero-photo-wrap">
-      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" onload="this.classList.add('loaded')">
+      <picture>
+      <source srcset="nicolas-photo.webp" type="image/webp">
+      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" fetchpriority="high" onload="this.classList.add('loaded')">
+    </picture>
     </div>
   </div>
 </section>
@@ -375,7 +425,13 @@
 </section>
 
 
-<button id="back-to-top" aria-label="Back to top">↑</button>
+<button id="back-to-top" aria-label="Back to top">
+  <svg class="btt-ring" viewBox="0 0 44 44" aria-hidden="true">
+    <circle class="btt-ring-track" cx="22" cy="22" r="18"/>
+    <circle class="btt-ring-fill" id="btt-ring-fill" cx="22" cy="22" r="18"/>
+  </svg>
+  <span class="btt-arrow">↑</span>
+</button>
 
 <!-- AVAILABILITY BADGE -->
 <div id="availability-badge">
@@ -426,10 +482,21 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-// ── Dark mode (run before paint) ───────────────────────────────────────────────
+// ── Dark mode (system preference + manual toggle) ──────────────────────────────
 const html = document.documentElement;
 const darkToggle = document.getElementById('dark-toggle');
-if (localStorage.getItem('dark') === '1') { html.classList.add('dark'); darkToggle.textContent = '○'; }
+const savedDark = localStorage.getItem('dark');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (savedDark === '1' || (savedDark === null && prefersDark)) {
+  html.classList.add('dark');
+  darkToggle.textContent = '○';
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (localStorage.getItem('dark') === null) {
+    html.classList.toggle('dark', e.matches);
+    darkToggle.textContent = e.matches ? '○' : '☽';
+  }
+});
 darkToggle.addEventListener('click', () => {
   html.classList.toggle('dark');
   const on = html.classList.contains('dark');
@@ -522,12 +589,16 @@ ScrollTrigger.create({
   onLeaveBack: () => document.getElementById('main-nav').classList.remove('scrolled')
 });
 
-// ── Scroll progress bar ────────────────────────────────────────────────────────
+// ── Scroll progress bar + back-to-top ring ────────────────────────────────────
 const progressBar = document.getElementById('scroll-progress');
 const backToTop = document.getElementById('back-to-top');
+const ringFill = document.getElementById('btt-ring-fill');
+const RING_CIRC = 2 * Math.PI * 18;
+if (ringFill) { ringFill.style.strokeDasharray = RING_CIRC; ringFill.style.strokeDashoffset = RING_CIRC; }
 lenis.on('scroll', ({ progress }) => {
   progressBar.style.width = (progress * 100) + '%';
   backToTop.classList.toggle('visible', progress > 0.12);
+  if (ringFill) ringFill.style.strokeDashoffset = RING_CIRC * (1 - progress);
 });
 
 // ── Active nav highlight ───────────────────────────────────────────────────────
@@ -877,6 +948,13 @@ async function handleSubmit(e) {
     btn.textContent = 'Error — try again'; btn.disabled = false;
     setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
   }
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
 }
 </script>
 </body>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found · Nicolas Roguski</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f4ef;
+    --fg: #15151a;
+    --navy: #1c2a4a;
+    --gold: #c4782a;
+    --muted: #6b6b60;
+  }
+
+  body {
+    font-family: 'Jost', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 3.5rem;
+    opacity: 0.7;
+  }
+
+  .error-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(6rem, 18vw, 10rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+  }
+
+  .error-line {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1.25rem 0;
+  }
+
+  .error-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .error-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 360px;
+    line-height: 1.65;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-home {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--navy);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .btn-home:hover { background: #2d3f63; }
+
+  .footer-note {
+    position: fixed;
+    bottom: 1.75rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+  <a href="/" class="logo">N. Roguski</a>
+  <div class="error-num">404</div>
+  <div class="error-line"></div>
+  <p class="error-title">Page not found.</p>
+  <p class="error-desc">The page you're looking for doesn't exist or may have been moved. Let's get you back to something familiar.</p>
+  <a href="/" class="btn-home">Return Home →</a>
+  <p class="footer-note">Biomedical Physiology · SFU</p>
+</body>
+</html>

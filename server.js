@@ -54,9 +54,22 @@ app.use((req, res, next) => {
 // ── Security headers ──────────────────────────────────────────────────────────
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  res.setHeader('Content-Security-Policy', [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' data: https:",
+    "connect-src 'self' https://formspree.io",
+    "form-action 'self' https://formspree.io",
+    "frame-src 'self' blob:",
+    "worker-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'"
+  ].join('; '));
   next();
 });
 
@@ -85,14 +98,40 @@ app.use((req, res, next) => {
   next();
 });
 
+// ── HTTP/2 early hints for the main page ──────────────────────────────────────
+app.use((req, res, next) => {
+  if (req.path === '/' || req.path === '/index.html') {
+    res.setHeader('Link', [
+      '</styles.min.css?v=5>; rel=preload; as=style',
+      '</nicolas-photo.webp>; rel=preload; as=image; type="image/webp"'
+    ].join(', '));
+  }
+  next();
+});
+
 // ── Static assets ─────────────────────────────────────────────────────────────
 app.use(express.static(__dirname, {
-  maxAge: '1d',
   etag: true,
   lastModified: true,
   setHeaders: (res, filepath) => {
-    if (filepath.endsWith('.html') || filepath.endsWith('.css') || filepath.endsWith('.js')) {
+    if (filepath.endsWith('.html')) {
+      // Always revalidate HTML
       res.setHeader('Cache-Control', 'no-cache');
+    } else if (filepath.endsWith('.min.css') || filepath.endsWith('.min.js')) {
+      // Versioned/hashed minified assets — cache forever
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filepath.endsWith('.css') || filepath.endsWith('.js')) {
+      // Unversioned source files — 1 hour with revalidation
+      res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+    } else if (/\.(webp|jpg|jpeg|png|gif|svg|ico)$/.test(filepath)) {
+      // Images — 30 days
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    } else if (/\.(woff2?|ttf|otf|eot)$/.test(filepath)) {
+      // Fonts — 1 year
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filepath.endsWith('.pdf')) {
+      // PDFs — 1 day
+      res.setHeader('Cache-Control', 'public, max-age=86400');
     }
   }
 }));
@@ -426,6 +465,9 @@ app.get('/admin', statsLimiter, requireAdminHtml, async (req, res) => {
     </div>
     <h3>Recent Activity</h3>
     <table><thead><tr><th>Time</th><th>Page</th><th>Referrer</th></tr></thead><tbody>${recentList}</tbody></table>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #eee;">
+      <a href="/api/analytics/export?token=${req.query.token || ''}" style="display:inline-block;padding:0.6rem 1.4rem;background:#1c2a4a;color:#f7f4ef;text-decoration:none;font-size:0.8rem;letter-spacing:0.08em;">↓ Download CSV</a>
+    </div>
     </body></html>`);
   } catch (err) {
     res.status(500).send('Error loading dashboard');
@@ -473,8 +515,60 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ── Analytics CSV export ──────────────────────────────────────────────────────
+app.get('/api/analytics/export', statsLimiter, requireAdmin, async (req, res) => {
+  try {
+    const analytics = await loadAnalytics();
+    const rows = [['timestamp', 'path', 'url', 'referrer', 'userAgent', 'sessionId']];
+    for (const v of analytics.pageViews) {
+      rows.push([
+        v.timestamp,
+        v.path,
+        v.url,
+        v.referrer || 'direct',
+        v.userAgent,
+        v.sessionId
+      ].map(field => `"${String(field).replace(/"/g, '""')}"`));
+    }
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const filename = `analytics-${new Date().toISOString().split('T')[0]}.csv`;
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'no-store');
+    res.send(csv);
+  } catch (err) {
+    res.status(500).json({ error: 'Export failed' });
+  }
+});
+
+// ── Sitemap ───────────────────────────────────────────────────────────────────
+app.get('/sitemap.xml', (req, res) => {
+  const base = `${req.protocol}://${req.get('host')}`;
+  const now = new Date().toISOString().split('T')[0];
+  const pages = [
+    { loc: '/', priority: '1.0', changefreq: 'monthly' },
+    { loc: '/myostatin-inhibitors.html', priority: '0.8', changefreq: 'monthly' }
+  ];
+  const urls = pages.map(p => `
+  <url>
+    <loc>${base}${p.loc}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('');
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+</urlset>`);
+});
+
 // ── 404 handler ───────────────────────────────────────────────────────────────
 app.use((req, res) => {
+  const acceptsHtml = req.headers.accept && req.headers.accept.includes('text/html');
+  if (acceptsHtml) {
+    return res.status(404).sendFile(path.join(__dirname, '404.html'));
+  }
   res.status(404).json({ error: 'Not found', path: req.path });
 });
 
