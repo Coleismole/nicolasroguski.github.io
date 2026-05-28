@@ -85,14 +85,40 @@ app.use((req, res, next) => {
   next();
 });
 
+// ── HTTP/2 early hints for the main page ──────────────────────────────────────
+app.use((req, res, next) => {
+  if (req.path === '/' || req.path === '/index.html') {
+    res.setHeader('Link', [
+      '</styles.min.css?v=5>; rel=preload; as=style',
+      '</nicolas-photo.webp>; rel=preload; as=image; type="image/webp"'
+    ].join(', '));
+  }
+  next();
+});
+
 // ── Static assets ─────────────────────────────────────────────────────────────
 app.use(express.static(__dirname, {
-  maxAge: '1d',
   etag: true,
   lastModified: true,
   setHeaders: (res, filepath) => {
-    if (filepath.endsWith('.html') || filepath.endsWith('.css') || filepath.endsWith('.js')) {
+    if (filepath.endsWith('.html')) {
+      // Always revalidate HTML
       res.setHeader('Cache-Control', 'no-cache');
+    } else if (filepath.endsWith('.min.css') || filepath.endsWith('.min.js')) {
+      // Versioned/hashed minified assets — cache forever
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filepath.endsWith('.css') || filepath.endsWith('.js')) {
+      // Unversioned source files — 1 hour with revalidation
+      res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+    } else if (/\.(webp|jpg|jpeg|png|gif|svg|ico)$/.test(filepath)) {
+      // Images — 30 days
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    } else if (/\.(woff2?|ttf|otf|eot)$/.test(filepath)) {
+      // Fonts — 1 year
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filepath.endsWith('.pdf')) {
+      // PDFs — 1 day
+      res.setHeader('Cache-Control', 'public, max-age=86400');
     }
   }
 }));

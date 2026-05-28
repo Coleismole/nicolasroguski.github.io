@@ -12,10 +12,17 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nicolas Roguski — Biomedical Physiology Student">
 <meta name="twitter:description" content="Bridging the science of medicine with compassionate patient care — one compound, one study, one breakthrough at a time.">
+<meta property="og:image" content="/nicolas-photo.webp">
+<meta property="og:image:width" content="900">
+<meta property="og:image:type" content="image/webp">
+<meta name="twitter:image" content="/nicolas-photo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="nicolas-photo.webp" as="image" type="image/webp">
+<link rel="preload" href="styles.min.css?v=5" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.min.css?v=5">
 <script src="analytics.js" defer></script>
 </head>
 <body>
@@ -113,7 +120,10 @@
   </div>
   <div class="hero-right">
     <div class="hero-photo-wrap">
-      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" onload="this.classList.add('loaded')">
+      <picture>
+      <source srcset="nicolas-photo.webp" type="image/webp">
+      <img src="nicolas-photo.jpg" alt="Nicolas Roguski at Shibuya Sky, Tokyo" class="hero-photo" id="hero-photo" fetchpriority="high" onload="this.classList.add('loaded')">
+    </picture>
     </div>
   </div>
 </section>
