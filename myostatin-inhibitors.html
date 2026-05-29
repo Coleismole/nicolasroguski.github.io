@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="subpage-styles.min.css?v=5">
+<link rel="stylesheet" href="subpage-styles.min.css?v=6">
 <style>
   .page-header { background: var(--sage); }
   .page-header::after { content: '01'; }
@@ -157,6 +157,7 @@
 <script src="analytics.js" defer></script>
 </head>
 <body>
+<div id="reading-progress"></div>
 
 <nav>
   <a href="index.html" class="nav-logo">N. Roguski</a>
@@ -310,6 +311,16 @@
   const words = document.querySelector('.content-area').innerText.trim().split(/\s+/).length;
   const mins = Math.ceil(words / 220);
   document.getElementById('reading-time').textContent = mins + ' min read';
+
+  const bar = document.getElementById('reading-progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 </script>
 </body>
 </html>
