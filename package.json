@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node server.js",
     "build": "node build.js",
+    "build:audit": "node build.js --audit",
+    "audit": "node audit.js",
+    "audit:save": "node audit.js --save",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,6 +23,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "lighthouse": "^12.8.2",
     "purgecss": "^8.0.0"
   }
 }

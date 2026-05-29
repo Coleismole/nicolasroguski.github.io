@@ -102,7 +102,25 @@ function bumpVersions() {
   console.log(`✓ Version bumped → CSS v${CSS_VERSION}, SW cache ${SW_CACHE_VERSION}`);
 }
 
+async function runAudit() {
+  return new Promise((resolve, reject) => {
+    const { spawn } = require('child_process');
+    const proc = spawn(process.execPath, [require('path').join(__dirname, 'audit.js')], {
+      stdio: 'inherit',
+      env: process.env
+    });
+    proc.on('close', code => {
+      if (code !== 0 && code !== null) {
+        console.warn(`\n⚠  Audit exited with code ${code} (performance score may be low).`);
+      }
+      resolve();
+    });
+    proc.on('error', reject);
+  });
+}
+
 (async () => {
+  const withAudit = process.argv.includes('--audit');
   try {
     await optimizeImage();
     minifyCSS();
@@ -110,6 +128,12 @@ function bumpVersions() {
     inlineCriticalCSS();
     bumpVersions();
     console.log('\nBuild complete.');
+    if (withAudit) {
+      console.log('\nRunning Lighthouse audit against http://localhost:5000 …');
+      await runAudit();
+    } else {
+      console.log(`${'\x1b[2m'}Tip: run "npm run build:audit" to also run a Lighthouse performance audit.${'\x1b[0m'}`);
+    }
   } catch (err) {
     console.error('Build failed:', err);
     process.exit(1);
