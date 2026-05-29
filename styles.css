@@ -1011,9 +1011,14 @@ html.dark #about { background: #141620; }
 html.dark .about-card { background: #1a1e2c; }
 html.dark .project-card { background: #141620; }
 html.dark .contact-form input,
-html.dark .contact-form textarea { background: rgba(255,255,255,0.06); }
+html.dark .contact-form textarea { background: rgba(255,255,255,0.06); color: #e8e3db; }
 html.dark #skills { background: #101628; }
+html.dark #skills .section-title { color: #e8e3db; }
+html.dark .skill-name { color: #e8e3db; }
+html.dark .skill-tooltip { background: #1a1e2c; color: rgba(232,227,219,0.85); }
+html.dark .skill-tooltip::after { border-top-color: #1a1e2c; }
 html.dark #contact { background: #0b0c12; }
+html.dark #contact .section-title { color: #e8e3db; }
 html.dark footer { background: #0b0c12; }
 html.dark #education { background: var(--cream); }
 html.dark .timeline-tag { background: var(--sage-pale); }
