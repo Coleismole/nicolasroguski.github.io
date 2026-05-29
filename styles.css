@@ -1011,20 +1011,20 @@ html.dark #about { background: #141620; }
 html.dark .about-card { background: #1a1e2c; }
 html.dark .project-card { background: #141620; }
 html.dark .contact-form input,
-html.dark .contact-form textarea { background: rgba(255,255,255,0.06); color: #e8e3db; }
+html.dark .contact-form textarea { background: rgba(255,255,255,0.06); }
 html.dark #skills { background: #101628; }
-html.dark #skills .section-title { color: var(--ink); }
-html.dark .skill-name { color: var(--ink); }
-html.dark .skill-tooltip { background: #1a1e2c; color: rgba(232,227,219,0.85); }
-html.dark .skill-tooltip::after { border-top-color: #1a1e2c; }
 html.dark #contact { background: #0b0c12; }
-html.dark #contact .section-title { color: var(--ink); }
 html.dark footer { background: #0b0c12; }
 html.dark #education { background: var(--cream); }
 html.dark .timeline-tag { background: var(--sage-pale); }
 html.dark .timeline-item::before { background: var(--cream); }
 html.dark .timeline-item:hover::before { background: var(--gold); }
 html.dark .skill-bar-track { background: rgba(255,255,255,0.07); }
+html.dark .topic-strip { background: #101628; }
+html.dark .project-num { color: rgba(232,227,219,0.12); }
+html.dark .project-card-header { background: #1e2436; }
+html.dark .project-card-header--alt  { background: #1c2030; }
+html.dark .project-card-header--alt2 { background: #1a2230; }
 
 /* ── DARK TOGGLE ── */
 .dark-toggle {

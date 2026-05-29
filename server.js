@@ -143,7 +143,9 @@ app.use(express.static(__dirname, {
 }));
 
 // ── Admin auth middleware ──────────────────────────────────────────────────────
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '8208';
+// NOTE: Hardcoded for local testing per user request. Do NOT commit
+// real secrets to source control in production.
+const ADMIN_TOKEN = '8208';
 
 const LOGIN_PAGE = (error = '') => `<!DOCTYPE html>
 <html lang="en">
