@@ -1,26 +1,39 @@
-const CACHE = 'nr-portfolio-v1';
-const RUNTIME = 'nr-runtime-v1';
+const CACHE_VERSION = 'v9';
+const CACHE = 'nr-portfolio-' + CACHE_VERSION;
+const RUNTIME = 'nr-runtime-' + CACHE_VERSION;
 const PRECACHE = [
   '/',
-  '/styles.min.css?v=5',
+  '/styles.min.css?v=9',
   '/analytics.js',
   '/nicolas-photo.webp',
+  '/nicolas-photo.avif',
   '/myostatin-inhibitors.html',
-  '/subpage-styles.min.css?v=5',
+  '/subpage-styles.min.css?v=9',
   '/offline.html',
-  '/favicon.svg'
+  '/favicon.svg',
+  '/fonts/fonts.css',
+  '/main.js'
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then(c => c.addAll(PRECACHE.filter(url => {
+        // Skip optional assets that may not exist yet
+        return !url.includes('.avif') && !url.includes('fonts.css') && !url.includes('main.js');
+      })))
+      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE && k !== RUNTIME).map(k => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter(k => k !== CACHE && k !== RUNTIME)
+          .map(k => caches.delete(k))
+      )
     ).then(() => self.clients.claim())
   );
 });
@@ -48,31 +61,45 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // For other GETs: try cache first, then network and update runtime cache (stale-while-revalidate)
+  // Fonts & versioned assets — cache-first (they have immutable headers)
+  if (url.pathname.startsWith('/fonts/') || url.searchParams.has('v')) {
+    e.respondWith(
+      caches.match(request).then(cached => {
+        if (cached) return cached;
+        return fetch(request).then(res => {
+          if (!res || res.status !== 200) return res;
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(request, clone));
+          return res;
+        });
+      })
+    );
+    return;
+  }
+
+  // Everything else — stale-while-revalidate via runtime cache
   e.respondWith(
     caches.match(request).then(cached => {
       const networkFetch = fetch(request).then(res => {
         if (!res || res.status !== 200 || res.type === 'opaque') return res;
         const clone = res.clone();
-        caches.open(RUNTIME).then(c => c.put(request, clone));
-        // Trim runtime cache if it grows too large
-        trimCache(RUNTIME, 120);
+        caches.open(RUNTIME).then(c => {
+          c.put(request, clone);
+          trimCache(RUNTIME, 80);
+        });
         return res;
       }).catch(() => null);
 
-      // Serve cached if available immediately, otherwise wait for network
-      return cached || networkFetch.then(r => r || cached) ;
+      return cached || networkFetch.then(r => r || cached);
     })
   );
 });
 
-// Simple cache trimming: keep newest `maxItems` entries
 function trimCache(cacheName, maxItems) {
   caches.open(cacheName).then(cache => {
     cache.keys().then(keys => {
       if (keys.length <= maxItems) return;
       const excess = keys.length - maxItems;
-      // delete oldest entries
       Promise.all(keys.slice(0, excess).map(k => cache.delete(k)));
     });
   });

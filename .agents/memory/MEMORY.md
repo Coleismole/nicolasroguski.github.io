@@ -1,0 +1,3 @@
+- [Build pipeline](build-pipeline.md) — build.js generates AVIF+WebP, PurgeCSS, inlines critical CSS, bumps all version strings; run after every CSS/image change
+- [Font self-hosting](font-self-hosting.md) — fonts stored in /fonts/ as woff2 with unicode-range subsets; regenerate via download-fonts.js if variants change
+- [CSS versioning](css-versioning.md) — CSS_VERSION constant in build.js controls all version strings (CSS, SW cache); bump it there, build.js propagates everywhere

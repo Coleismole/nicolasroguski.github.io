@@ -1,22 +1,34 @@
 const sharp = require('sharp');
 const CleanCSS = require('clean-css');
+const { PurgeCSS } = require('purgecss');
 const fs = require('fs');
 const path = require('path');
 
+const CSS_VERSION = 9;
+const SW_CACHE_VERSION = `v${CSS_VERSION}`;
+
 async function optimizeImage() {
-  const outFile = 'nicolas-photo.webp';
-  await sharp('nicolas-photo.jpg')
-    .resize(900, null, { withoutEnlargement: true })
-    .webp({ quality: 82, effort: 5 })
-    .toFile(outFile);
-  const orig = fs.statSync('nicolas-photo.jpg').size;
-  const opt  = fs.statSync(outFile).size;
-  console.log(`✓ Image → ${outFile}  (${(orig/1024).toFixed(0)} KB → ${(opt/1024).toFixed(0)} KB, ${((1-opt/orig)*100).toFixed(1)}% smaller)`);
+  const src = 'nicolas-photo.jpg';
+  const orig = fs.statSync(src).size;
+
+  // WebP
+  const webpFile = 'nicolas-photo.webp';
+  await sharp(src).resize(900, null, { withoutEnlargement: true })
+    .webp({ quality: 82, effort: 5 }).toFile(webpFile);
+  const webpSize = fs.statSync(webpFile).size;
+  console.log(`✓ Image → ${webpFile}  (${(orig/1024).toFixed(0)} KB → ${(webpSize/1024).toFixed(0)} KB, ${((1-webpSize/orig)*100).toFixed(1)}% smaller)`);
+
+  // AVIF
+  const avifFile = 'nicolas-photo.avif';
+  await sharp(src).resize(900, null, { withoutEnlargement: true })
+    .avif({ quality: 62, effort: 6 }).toFile(avifFile);
+  const avifSize = fs.statSync(avifFile).size;
+  console.log(`✓ Image → ${avifFile}  (${(orig/1024).toFixed(0)} KB → ${(avifSize/1024).toFixed(0)} KB, ${((1-avifSize/orig)*100).toFixed(1)}% smaller)`);
 }
 
 function minifyCSS() {
   const cleanCSS = new CleanCSS({ level: 2, returnPromise: false });
-  const files = ['styles.css', 'subpage-styles.css'];
+  const files = ['styles.css', 'subpage-styles.css', 'critical.css'];
   for (const file of files) {
     const input = fs.readFileSync(file, 'utf8');
     const result = cleanCSS.minify(input);
@@ -28,10 +40,75 @@ function minifyCSS() {
   }
 }
 
+async function runPurgeCSS() {
+  const htmlFiles = ['index.html', 'myostatin-inhibitors.html', '404.html', 'offline.html'];
+  const cssFiles = ['styles.min.css', 'subpage-styles.min.css'];
+
+  // Only purge against files that exist
+  const existingHTML = htmlFiles.filter(f => fs.existsSync(f));
+
+  const result = await new PurgeCSS().purge({
+    content: existingHTML,
+    css: cssFiles,
+    safelist: {
+      standard: ['dark', 'open', 'active', 'visible', 'loaded', 'scrolled', 'show', 'cursor-hover'],
+      greedy: [/^dark$/, /^html\.dark/, /\.dark\s/, /\.loaded/, /\.open/, /\.active/, /\.visible/, /\.scrolled/, /\.show/, /cursor-hover/]
+    }
+  });
+
+  for (const item of result) {
+    const before = fs.statSync(item.file).size;
+    fs.writeFileSync(item.file, item.css);
+    const after = Buffer.byteLength(item.css);
+    console.log(`✓ PurgeCSS → ${item.file}  (${(before/1024).toFixed(0)} KB → ${(after/1024).toFixed(0)} KB, ${((1-after/before)*100).toFixed(1)}% smaller)`);
+  }
+}
+
+function inlineCriticalCSS() {
+  const critical = fs.readFileSync('critical.min.css', 'utf8');
+  const htmlFiles = ['index.html'];
+
+  for (const file of htmlFiles) {
+    if (!fs.existsSync(file)) continue;
+    let html = fs.readFileSync(file, 'utf8');
+    // Replace content between markers
+    html = html.replace(
+      /<!-- critical-css-start -->[\s\S]*?<!-- critical-css-end -->/,
+      `<!-- critical-css-start -->\n<style>${critical}</style>\n<!-- critical-css-end -->`
+    );
+    fs.writeFileSync(file, html);
+    console.log(`✓ Inlined critical CSS → ${file}`);
+  }
+}
+
+function bumpVersions() {
+  // Update CSS version refs in index.html
+  let html = fs.readFileSync('index.html', 'utf8');
+  html = html.replace(/styles\.min\.css\?v=\d+/g, `styles.min.css?v=${CSS_VERSION}`);
+  fs.writeFileSync('index.html', html);
+
+  // Update subpage version ref
+  let subpage = fs.readFileSync('myostatin-inhibitors.html', 'utf8');
+  subpage = subpage.replace(/subpage-styles\.min\.css\?v=\d+/g, `subpage-styles.min.css?v=${CSS_VERSION}`);
+  fs.writeFileSync('myostatin-inhibitors.html', subpage);
+
+  // Update SW cache version
+  let sw = fs.readFileSync('sw.js', 'utf8');
+  sw = sw.replace(/const CACHE_VERSION = '[^']+';/, `const CACHE_VERSION = '${SW_CACHE_VERSION}';`);
+  sw = sw.replace(/\/styles\.min\.css\?v=\d+/g, `/styles.min.css?v=${CSS_VERSION}`);
+  sw = sw.replace(/\/subpage-styles\.min\.css\?v=\d+/g, `/subpage-styles.min.css?v=${CSS_VERSION}`);
+  fs.writeFileSync('sw.js', sw);
+
+  console.log(`✓ Version bumped → CSS v${CSS_VERSION}, SW cache ${SW_CACHE_VERSION}`);
+}
+
 (async () => {
   try {
     await optimizeImage();
     minifyCSS();
+    await runPurgeCSS();
+    inlineCriticalCSS();
+    bumpVersions();
     console.log('\nBuild complete.');
   } catch (err) {
     console.error('Build failed:', err);
