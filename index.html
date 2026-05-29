@@ -439,7 +439,7 @@
       <input type="email" name="email" placeholder="Your email" required>
       <input type="text" name="subject" placeholder="Subject">
       <textarea name="message" placeholder="Your message..."></textarea>
-      <button type="button" id="contact-send" class="btn btn-gold">Send message</button>
+      <button type="submit" id="contact-send" class="btn btn-gold">Send message</button>
     </form>
   </div>
 </section>
@@ -820,7 +820,7 @@ gsap.from('.contact-sub', {
   y: 16, opacity: 0, duration: 0.7, ease: 'power2.out',
   scrollTrigger: { trigger: '.contact-sub', start: 'top 88%' }
 });
-gsap.from('.contact-form input, .contact-form textarea, .contact-form button', {
+gsap.from('.contact-form input, .contact-form textarea', {
   y: 20, opacity: 0, duration: 0.55, ease: 'power2.out', stagger: 0.09,
   scrollTrigger: { trigger: '.contact-form', start: 'top 82%' }
 });
@@ -1029,9 +1029,17 @@ async function handleSubmit(e) {
     }
   });
 
+  // Use the form's submit event for consistent behavior and accessibility
+  form.addEventListener('submit', handleSubmit);
+
+  // Keep the explicit button wired for older browsers by requesting a submit
   sendBtn.addEventListener('click', () => {
-    // Call handleSubmit with a synthetic event object carrying the form as target
-    handleSubmit({ preventDefault: () => {}, target: form });
+    if (typeof form.requestSubmit === 'function') {
+      form.requestSubmit();
+    } else {
+      // Fallback for very old browsers
+      form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    }
   });
 })();
 </script>

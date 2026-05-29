@@ -930,6 +930,23 @@ section { padding: 7rem 6rem; }
 .contact-form textarea:focus { border-color: var(--gold); }
 .contact-form textarea { min-height: 130px; }
 
+/* Ensure the contact form button is visible even if JS animations fail */
+.contact-form button {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  background: var(--gold) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--gold) !important;
+  padding: 0.85rem 1.1rem !important;
+  font-size: 0.95rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 20 !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12) !important;
+}
+
 .btn-gold {
   background: var(--gold);
   color: var(--ink);

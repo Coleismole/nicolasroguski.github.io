@@ -238,6 +238,14 @@ After deploying:
 | `index.html` | Full page markup + all inline JS (~950 lines) |
 | `styles.css` | All styling — edit this, not `.min.css` |
 | `build.js` | Asset pipeline — image conversion + CSS minification |
+
+---
+
+## Changelog
+
+- 2026-05-29 — Fix: restored explicit contact form "Send message" button,
+  prevented it being hidden by reveal animations, and ensured accessible
+  submit handling via `form.submit`/`requestSubmit()`.
 | `sw.js` | Service worker — update `PRECACHE` when adding pages/assets |
 
 ## Notes
