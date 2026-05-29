@@ -108,8 +108,8 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   if (req.path === '/' || req.path === '/index.html') {
     res.setHeader('Link', [
-      '</styles.min.css?v=5>; rel=preload; as=style',
-      '</nicolas-photo.webp>; rel=preload; as=image; type="image/webp"'
+      '</assets/css/styles.min.css?v=9>; rel=preload; as=style',
+      '</assets/img/nicolas-photo.webp>; rel=preload; as=image; type="image/webp"'
     ].join(', '));
   }
   next();

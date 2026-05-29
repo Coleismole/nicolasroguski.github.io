@@ -8,18 +8,22 @@ const CSS_VERSION = 9;
 const SW_CACHE_VERSION = `v${CSS_VERSION}`;
 
 async function optimizeImage() {
-  const src = 'nicolas-photo.jpg';
+  const src = 'assets/img/nicolas-photo.jpg';
+  if (!fs.existsSync(src)) {
+    console.log(`Skipping image optimization: ${src} not found`);
+    return;
+  }
   const orig = fs.statSync(src).size;
 
   // WebP
-  const webpFile = 'nicolas-photo.webp';
+  const webpFile = 'assets/img/nicolas-photo.webp';
   await sharp(src).resize(900, null, { withoutEnlargement: true })
     .webp({ quality: 82, effort: 5 }).toFile(webpFile);
   const webpSize = fs.statSync(webpFile).size;
   console.log(`✓ Image → ${webpFile}  (${(orig/1024).toFixed(0)} KB → ${(webpSize/1024).toFixed(0)} KB, ${((1-webpSize/orig)*100).toFixed(1)}% smaller)`);
 
   // AVIF
-  const avifFile = 'nicolas-photo.avif';
+  const avifFile = 'assets/img/nicolas-photo.avif';
   await sharp(src).resize(900, null, { withoutEnlargement: true })
     .avif({ quality: 62, effort: 6 }).toFile(avifFile);
   const avifSize = fs.statSync(avifFile).size;
@@ -28,8 +32,9 @@ async function optimizeImage() {
 
 function minifyCSS() {
   const cleanCSS = new CleanCSS({ level: 2, returnPromise: false });
-  const files = ['styles.css', 'subpage-styles.css', 'critical.css'];
+  const files = ['assets/css/styles.css', 'assets/css/subpage-styles.css', 'assets/css/critical.css'];
   for (const file of files) {
+    if (!fs.existsSync(file)) continue;
     const input = fs.readFileSync(file, 'utf8');
     const result = cleanCSS.minify(input);
     if (result.errors.length) { console.error(`CSS errors in ${file}:`, result.errors); continue; }
@@ -42,14 +47,17 @@ function minifyCSS() {
 
 async function runPurgeCSS() {
   const htmlFiles = ['index.html', 'myostatin-inhibitors.html', '404.html', 'offline.html'];
-  const cssFiles = ['styles.min.css', 'subpage-styles.min.css'];
+  const cssFiles = ['assets/css/styles.min.css', 'assets/css/subpage-styles.min.css'];
 
   // Only purge against files that exist
   const existingHTML = htmlFiles.filter(f => fs.existsSync(f));
+  const existingCSS = cssFiles.filter(f => fs.existsSync(f));
+
+  if (existingCSS.length === 0) return;
 
   const result = await new PurgeCSS().purge({
     content: existingHTML,
-    css: cssFiles,
+    css: existingCSS,
     safelist: {
       standard: ['dark', 'open', 'active', 'visible', 'loaded', 'scrolled', 'show', 'cursor-hover'],
       greedy: [/^dark$/, /^html\.dark/, /\.dark\s/, /\.loaded/, /\.open/, /\.active/, /\.visible/, /\.scrolled/, /\.show/, /cursor-hover/]
@@ -65,7 +73,9 @@ async function runPurgeCSS() {
 }
 
 function inlineCriticalCSS() {
-  const critical = fs.readFileSync('critical.min.css', 'utf8');
+  const criticalPath = 'assets/css/critical.min.css';
+  if (!fs.existsSync(criticalPath)) return;
+  const critical = fs.readFileSync(criticalPath, 'utf8');
   const htmlFiles = ['index.html'];
 
   for (const file of htmlFiles) {
@@ -83,21 +93,27 @@ function inlineCriticalCSS() {
 
 function bumpVersions() {
   // Update CSS version refs in index.html
-  let html = fs.readFileSync('index.html', 'utf8');
-  html = html.replace(/styles\.min\.css\?v=\d+/g, `styles.min.css?v=${CSS_VERSION}`);
-  fs.writeFileSync('index.html', html);
+  if (fs.existsSync('index.html')) {
+    let html = fs.readFileSync('index.html', 'utf8');
+    html = html.replace(/assets\/css\/styles\.min\.css\?v=\d+/g, `assets/css/styles.min.css?v=${CSS_VERSION}`);
+    fs.writeFileSync('index.html', html);
+  }
 
   // Update subpage version ref
-  let subpage = fs.readFileSync('myostatin-inhibitors.html', 'utf8');
-  subpage = subpage.replace(/subpage-styles\.min\.css\?v=\d+/g, `subpage-styles.min.css?v=${CSS_VERSION}`);
-  fs.writeFileSync('myostatin-inhibitors.html', subpage);
+  if (fs.existsSync('myostatin-inhibitors.html')) {
+    let subpage = fs.readFileSync('myostatin-inhibitors.html', 'utf8');
+    subpage = subpage.replace(/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
+    fs.writeFileSync('myostatin-inhibitors.html', subpage);
+  }
 
   // Update SW cache version
-  let sw = fs.readFileSync('sw.js', 'utf8');
-  sw = sw.replace(/const CACHE_VERSION = '[^']+';/, `const CACHE_VERSION = '${SW_CACHE_VERSION}';`);
-  sw = sw.replace(/\/styles\.min\.css\?v=\d+/g, `/styles.min.css?v=${CSS_VERSION}`);
-  sw = sw.replace(/\/subpage-styles\.min\.css\?v=\d+/g, `/subpage-styles.min.css?v=${CSS_VERSION}`);
-  fs.writeFileSync('sw.js', sw);
+  if (fs.existsSync('sw.js')) {
+    let sw = fs.readFileSync('sw.js', 'utf8');
+    sw = sw.replace(/const CACHE_VERSION = '[^']+';/, `const CACHE_VERSION = '${SW_CACHE_VERSION}';`);
+    sw = sw.replace(/\/assets\/css\/styles\.min\.css\?v=\d+/g, `/assets/css/styles.min.css?v=${CSS_VERSION}`);
+    sw = sw.replace(/\/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `/assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
+    fs.writeFileSync('sw.js', sw);
+  }
 
   console.log(`✓ Version bumped → CSS v${CSS_VERSION}, SW cache ${SW_CACHE_VERSION}`);
 }

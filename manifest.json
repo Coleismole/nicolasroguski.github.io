@@ -6,7 +6,7 @@
   "background_color": "#f7f4ef",
   "theme_color": "#1c2a4a",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "/nicolas-photo.webp", "sizes": "512x512", "type": "image/webp" }
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/img/nicolas-photo.webp", "sizes": "512x512", "type": "image/webp" }
   ]
 }

@@ -2,59 +2,14 @@
 
 This is a small, dependency-light portfolio site for **Nicolas Roguski**. It uses plain HTML/CSS/JS and is served by a minimal Node.js + Express backend. No frontend framework required — static assets are served directly.
 
----
-
-## Prerequisites
-
-- Node.js (recommended >= 16) and `npm` installed
-- A modern browser (Chrome, Firefox, Edge, Safari)
-
-## Quick start (minimum)
-
-These commands get the site running locally in most environments:
-
-```bash
-npm install          # install server dependencies
-npm run build        # convert images + minify CSS (recommended first run)
-npm start            # start the server (default: http://localhost:5000)
-```
-
-Open your browser to `http://localhost:5000`.
-
-If you just want to preview without the build step (the repo already includes `.min.css` and `.webp`):
-
-```bash
-npm install
-npm start
-```
-
----
-
 ## Project Structure
+- `assets/`: Publicly accessible static assets (css/, img/, js/, pdf/, fonts/).
+- `scripts/`: Build and audit scripts.
+- Root (`/`): HTML entry points, PWA files (sw.js, manifest.json), and configuration files.
 
-```
-.
-├── index.html                  # Main portfolio page (single-page)
-├── myostatin-inhibitors.html   # Research subpage — Myostatin Inhibition paper
-├── styles.css                  # Source CSS (edit this, then run npm run build)
-├── styles.min.css              # Minified CSS — auto-generated, do not edit directly
-├── subpage-styles.css          # Source CSS for research subpages
-├── subpage-styles.min.css      # Minified subpage CSS — auto-generated
-├── analytics.js                # Client-side privacy-first analytics script
-├── server.js                   # Express server — API, analytics, admin, static serving
-├── build.js                    # Build script: image → WebP, CSS → minified
-├── sw.js                       # Service worker — offline support + asset caching
-├── offline.html                # Offline fallback page
-├── 404.html                    # Styled 404 page
-├── favicon.svg                 # SVG favicon (navy "NR" monogram)
-├── nicolas-photo.jpg           # Original hero image (3 MB, source only)
-├── nicolas-photo.webp          # Optimised hero image (160 KB) — auto-generated
-├── nicolas-roguski-cv.pdf      # Downloadable CV
-├── robots.txt                  # Crawler rules + sitemap reference
-└── package.json
-```
-
----
+## Commands
+- `npm run build`: Minifies CSS, optimizes images, and updates version hashes (points to `scripts/build.js`).
+- `npm start`: Starts the local development server.
 
 ## Tech Stack
 

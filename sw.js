@@ -3,16 +3,16 @@ const CACHE = 'nr-portfolio-' + CACHE_VERSION;
 const RUNTIME = 'nr-runtime-' + CACHE_VERSION;
 const PRECACHE = [
   '/',
-  '/styles.min.css?v=9',
-  '/analytics.js',
-  '/nicolas-photo.webp',
-  '/nicolas-photo.avif',
+  '/assets/css/styles.min.css?v=9',
+  '/assets/js/analytics.js',
+  '/assets/img/nicolas-photo.webp',
+  '/assets/img/nicolas-photo.avif',
   '/myostatin-inhibitors.html',
-  '/subpage-styles.min.css?v=9',
+  '/assets/css/subpage-styles.min.css?v=9',
   '/offline.html',
-  '/favicon.svg',
-  '/fonts/fonts.css',
-  '/main.js'
+  '/assets/img/favicon.svg',
+  '/assets/fonts/fonts.css',
+  '/assets/js/main.js'
 ];
 
 self.addEventListener('install', e => {
@@ -62,7 +62,7 @@ self.addEventListener('fetch', e => {
   }
 
   // Fonts & versioned assets — cache-first (they have immutable headers)
-  if (url.pathname.startsWith('/fonts/') || url.searchParams.has('v')) {
+  if (url.pathname.startsWith('/assets/fonts/') || url.searchParams.has('v')) {
     e.respondWith(
       caches.match(request).then(cached => {
         if (cached) return cached;

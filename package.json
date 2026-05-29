@@ -4,10 +4,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "node build.js",
-    "build:audit": "node build.js --audit",
-    "audit": "node audit.js",
-    "audit:save": "node audit.js --save",
+    "build": "node scripts/build.js",
+    "build:audit": "node scripts/build.js --audit",
+    "audit": "node scripts/audit.js",
+    "audit:save": "node scripts/audit.js --save",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
