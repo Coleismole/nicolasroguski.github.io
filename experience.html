@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Nicolas Roguski</title>
+    <meta name="description" content="Professional experience of Nicolas Roguski, Biomedical Physiology student">
+    <link rel="canonical" href="https://nicolas-roguski.replit.app/experience.html">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/subpage-styles.min.css?v=9">
+    <style>
+      body {
+        font-family: 'Jost', sans-serif;
+        background: #f7f4ef;
+        color: #15151a;
+        font-weight: 400;
+        line-height: 1.7;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        padding: 1.2rem 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(247,244,239,0.82);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid transparent;
+        transition: padding 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      }
+      
+      nav.scrolled {
+        padding: 0.85rem 3rem;
+        background: rgba(247,244,239,0.96);
+        border-bottom-color: rgba(28,42,74,0.15);
+        box-shadow: 0 2px 24px rgba(28,42,74,0.06);
+      }
+      
+      .nav-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.15rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: #1c2a4a;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      .nav-logo:hover { opacity: 0.7; }
+      
+      .nav-links {
+        display: flex;
+        gap: 2.4rem;
+        list-style: none;
+      }
+      
+      .nav-links a {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #6a6a72;
+        text-decoration: none;
+        transition: color 0.2s;
+        position: relative;
+      }
+      
+      .nav-links a:hover { color: #1c2a4a; }
+      
+      .nav-links a.active { color: #1c2a4a; }
+      
+      .nav-links a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; left: 0; right: 0;
+        height: 1px;
+        background: #c4782a;
+      }
+      
+      /* ── HAMBURGER ── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+      }
+      
+      .nav-hamburger span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #1c2a4a;
+        transition: transform 0.25s, opacity 0.25s;
+        transform-origin: center;
+      }
+      
+      .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+      .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      
+      /* ── MAIN CONTENT ── */
+      main {
+        flex: 1;
+        padding: 7rem 6rem;
+      }
+      
+      .section-label {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        color: #c4782a;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .section-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #c4782a;
+        opacity: 0.35;
+        max-width: 3rem;
+      }
+      
+      .section-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        font-weight: 400;
+        line-height: 1.15;
+        color: #1c2a4a;
+        margin-bottom: 1.5rem;
+      }
+      
+      /* ── TIMELINE ── */
+      .timeline {
+        margin-top: 3.5rem;
+        position: relative;
+        max-width: 720px;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 5px; top: 8px; bottom: 0;
+        width: 1px;
+        background: rgba(28,42,74,0.15);
+        transform-origin: top center;
+      }
+      .timeline-item {
+        position: relative;
+        padding: 0 0 3.2rem 2.5rem;
+      }
+      .timeline-item:last-child { padding-bottom: 0; }
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 5px;
+        width: 11px; height: 11px;
+        border-radius: 50%;
+        border: 2px solid #c4782a;
+        background: #f7f4ef;
+        transition: background 0.3s;
+      }
+      .timeline-item:hover::before { background: #c4782a; }
+      
+      .timeline-period {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #c4782a;
+        margin-bottom: 0.45rem;
+      }
+      .timeline-inst {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.55rem;
+        font-weight: 500;
+        color: #1c2a4a;
+        line-height: 1.2;
+        margin-bottom: 0.3rem;
+      }
+      .timeline-prog {
+        font-size: 0.9rem;
+        color: #6a6a72;
+        font-weight: 400;
+        margin-bottom: 0.85rem;
+      }
+      .timeline-desc {
+        font-size: 0.95rem;
+        color: #15151a;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+      .timeline-tags { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 0.45rem; 
+      }
+      .timeline-tag {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #eef1f7;
+        color: #1c2a4a;
+        padding: 0.18rem 0.55rem;
+        border: 1px solid rgba(28,42,74,0.15);
+      }
+      
+      /* ── FOOTER ── */
+      footer {
+        background: #1c2a4a;
+        color: #f7f4ef;
+        padding: 2rem 6rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.05rem;
+        color: rgba(245,240,232,0.3);
+        font-weight: 400;
+      }
+      .footer-copy {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: rgba(245,240,232,0.2);
+      }
+      .footer-social { 
+        display: flex; 
+        gap: 1.2rem; 
+        align-items: center; 
+      }
+      .footer-social a {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(245,240,232,0.35);
+        text-decoration: none;
+        transition: color 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .footer-social a:hover { color: #d4914a; }
+    </style>
+    <script src="assets/js/analytics.js" defer></script>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">N. Roguski</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="experience.html" class="active">Experience</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+  <p class="section-label">Professional Background</p>
+  <div class="title-clip">
+    <h2 class="section-title">Experience Timeline</h2>
+  </div>
+  
+  <div class="timeline">
+    <div class="timeline-line"></div>
+    <div class="timeline-item">
+      <p class="timeline-period">2023 — Present</p>
+      <h3 class="timeline-inst">Polygon Homes</h3>
+      <p class="timeline-prog">Sales Assistant</p>
+      <p class="timeline-desc">Worked as a Sales Assistant supporting Polygon Homes' sales operations: greeted and advised prospective buyers, guided clients through model home features and options, coordinated appointments and walkthroughs, assisted with sales documentation, tracked inventory for display homes, and maintained showroom presentation. Communicated client feedback to the sales team and helped ensure a professional customer experience.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Customer service</span>
+        <span class="timeline-tag">Sales support</span>
+        <span class="timeline-tag">Showroom & inventory</span>
+        <span class="timeline-tag">Client coordination</span>
+        <span class="timeline-tag">Burnaby, BC</span>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <p class="timeline-period">2022 — 2026</p>
+      <h3 class="timeline-inst">École Dr. Charles Best Secondary</h3>
+      <p class="timeline-prog">Student</p>
+      <p class="timeline-desc">Maintained consistent academic excellence throughout high school with particular strengths in sciences and mathematics. Actively participated in school activities and consistently achieved Honor Roll status.</p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Honor Roll 2023</span>
+        <span class="timeline-tag">Honor Roll 2024</span>
+        <span class="timeline-tag">Honor Roll 2025</span>
+        <span class="timeline-tag">Honor Roll 2026</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Nicolas Roguski</p>
+  <div class="footer-social">
+    <a href="#" onclick="copyEmail(); return false;">✉ Email</a>
+    <a href="https://www.linkedin.com/in/nicolas-ross-roguski-66028937b" target="_blank">⊞ LinkedIn</a>
+  </div>
+  <p class="footer-copy">© 2026 · Biomedical Physiology · SFU</p>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  
+  // Close menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+  
+  // Email copy functionality
+  function copyEmail() {
+    navigator.clipboard.writeText('coleroguski@gmail.com').then(() => {
+      // Show toast or visual feedback
+      alert('Email copied to clipboard!');
+    });
+  }
+</script>
+</body>
+</html>
