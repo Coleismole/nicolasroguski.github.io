@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v9';
+const CACHE_VERSION = 'v10';
 const CACHE = 'nr-portfolio-' + CACHE_VERSION;
 const RUNTIME = 'nr-runtime-' + CACHE_VERSION;
 const PRECACHE = [
