@@ -4,7 +4,7 @@ const { PurgeCSS } = require('purgecss');
 const fs = require('fs');
 const path = require('path');
 
-const CSS_VERSION = 9;
+const CSS_VERSION = 10;
 const SW_CACHE_VERSION = `v${CSS_VERSION}`;
 
 async function optimizeImage() {
@@ -96,14 +96,17 @@ function bumpVersions() {
   if (fs.existsSync('index.html')) {
     let html = fs.readFileSync('index.html', 'utf8');
     html = html.replace(/assets\/css\/styles\.min\.css\?v=\d+/g, `assets/css/styles.min.css?v=${CSS_VERSION}`);
+    html = html.replace(/assets\/fonts\/fonts\.css\?v=\d+/g, `assets/fonts/fonts.css?v=${CSS_VERSION}`);
     fs.writeFileSync('index.html', html);
   }
 
-  // Update subpage version ref
-  if (fs.existsSync('myostatin-inhibitors.html')) {
-    let subpage = fs.readFileSync('myostatin-inhibitors.html', 'utf8');
-    subpage = subpage.replace(/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
-    fs.writeFileSync('myostatin-inhibitors.html', subpage);
+  // Update subpage version refs
+  const subpages = fs.readdirSync('.').filter(f => f.endsWith('.html') && f !== 'index.html');
+  for (const file of subpages) {
+    let html = fs.readFileSync(file, 'utf8');
+    html = html.replace(/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
+    html = html.replace(/assets\/fonts\/fonts\.css\?v=\d+/g, `assets/fonts/fonts.css?v=${CSS_VERSION}`);
+    fs.writeFileSync(file, html);
   }
 
   // Update SW cache version
@@ -112,6 +115,7 @@ function bumpVersions() {
     sw = sw.replace(/const CACHE_VERSION = '[^']+';/, `const CACHE_VERSION = '${SW_CACHE_VERSION}';`);
     sw = sw.replace(/\/assets\/css\/styles\.min\.css\?v=\d+/g, `/assets/css/styles.min.css?v=${CSS_VERSION}`);
     sw = sw.replace(/\/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `/assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
+    sw = sw.replace(/\/assets\/fonts\/fonts\.css(\?v=\d+)?/g, `/assets/fonts/fonts.css?v=${CSS_VERSION}`);
     fs.writeFileSync('sw.js', sw);
   }
 

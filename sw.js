@@ -3,15 +3,15 @@ const CACHE = 'nr-portfolio-' + CACHE_VERSION;
 const RUNTIME = 'nr-runtime-' + CACHE_VERSION;
 const PRECACHE = [
   '/',
-  '/assets/css/styles.min.css?v=9',
+  '/assets/css/styles.min.css?v=10',
   '/assets/js/analytics.js',
   '/assets/img/nicolas-photo.webp',
   '/assets/img/nicolas-photo.avif',
   '/myostatin-inhibitors.html',
-  '/assets/css/subpage-styles.min.css?v=9',
+  '/assets/css/subpage-styles.min.css?v=10',
   '/offline.html',
   '/assets/img/favicon.svg',
-  '/assets/fonts/fonts.css',
+  '/assets/fonts/fonts.css?v=10',
   '/assets/js/main.js'
 ];
 
