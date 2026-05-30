@@ -1,19 +1,26 @@
 const CACHE_VERSION = 'v10';
 const CACHE = 'nr-portfolio-' + CACHE_VERSION;
 const RUNTIME = 'nr-runtime-' + CACHE_VERSION;
-const PRECACHE = [
-  '/',
-  '/assets/css/styles.min.css?v=10',
-  '/assets/js/analytics.js',
-  '/assets/img/nicolas-photo.webp',
-  '/assets/img/nicolas-photo.avif',
-  '/myostatin-inhibitors.html',
-  '/assets/css/subpage-styles.min.css?v=10',
-  '/offline.html',
-  '/assets/img/favicon.svg',
-  '/assets/fonts/fonts.css?v=10',
-  '/assets/js/main.js'
+
+// Derive base path from the SW's own location so this works both at root
+// (Replit, custom domain) and in a subdirectory (e.g. /repo-name/ on GitHub Pages).
+const BASE = new URL('./', self.location.href).pathname;
+
+const PRECACHE_PATHS = [
+  '',
+  'assets/css/styles.min.css?v=10',
+  'assets/js/analytics.js',
+  'assets/img/nicolas-photo.webp',
+  'assets/img/nicolas-photo.avif',
+  'myostatin-inhibitors.html',
+  'assets/css/subpage-styles.min.css?v=10',
+  'offline.html',
+  'assets/img/favicon.svg',
+  'assets/fonts/fonts.css?v=10',
+  'assets/js/main.js'
 ];
+
+const PRECACHE = PRECACHE_PATHS.map(p => BASE + p);
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -43,7 +50,10 @@ self.addEventListener('fetch', e => {
   const url = new URL(request.url);
 
   if (request.method !== 'GET') return;
-  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/admin')) return;
+
+  // Skip server-side API and admin routes (not available on static hosts)
+  const relativePath = url.pathname.slice(BASE.length);
+  if (relativePath.startsWith('api/') || relativePath.startsWith('admin')) return;
 
   // Navigation requests — network-first with offline fallback
   if (request.mode === 'navigate') {
@@ -55,14 +65,14 @@ self.addEventListener('fetch', e => {
           return res;
         })
         .catch(() =>
-          caches.match(request).then(cached => cached || caches.match('/offline.html'))
+          caches.match(request).then(cached => cached || caches.match(BASE + 'offline.html'))
         )
     );
     return;
   }
 
   // Fonts & versioned assets — cache-first (they have immutable headers)
-  if (url.pathname.startsWith('/assets/fonts/') || url.searchParams.has('v')) {
+  if (url.pathname.startsWith(BASE + 'assets/fonts/') || url.searchParams.has('v')) {
     e.respondWith(
       caches.match(request).then(cached => {
         if (cached) return cached;
