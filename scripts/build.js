@@ -6,24 +6,23 @@ const path = require('path');
 
 const CSS_VERSION = 10;
 const SW_CACHE_VERSION = `v${CSS_VERSION}`;
+const PUBLIC = 'public';
 
 async function optimizeImage() {
-  const src = 'assets/img/nicolas-photo.jpg';
+  const src = `${PUBLIC}/assets/img/nicolas-photo.jpg`;
   if (!fs.existsSync(src)) {
     console.log(`Skipping image optimization: ${src} not found`);
     return;
   }
   const orig = fs.statSync(src).size;
 
-  // WebP
-  const webpFile = 'assets/img/nicolas-photo.webp';
+  const webpFile = `${PUBLIC}/assets/img/nicolas-photo.webp`;
   await sharp(src).resize(900, null, { withoutEnlargement: true })
     .webp({ quality: 82, effort: 5 }).toFile(webpFile);
   const webpSize = fs.statSync(webpFile).size;
   console.log(`✓ Image → ${webpFile}  (${(orig/1024).toFixed(0)} KB → ${(webpSize/1024).toFixed(0)} KB, ${((1-webpSize/orig)*100).toFixed(1)}% smaller)`);
 
-  // AVIF
-  const avifFile = 'assets/img/nicolas-photo.avif';
+  const avifFile = `${PUBLIC}/assets/img/nicolas-photo.avif`;
   await sharp(src).resize(900, null, { withoutEnlargement: true })
     .avif({ quality: 62, effort: 6 }).toFile(avifFile);
   const avifSize = fs.statSync(avifFile).size;
@@ -32,7 +31,11 @@ async function optimizeImage() {
 
 function minifyCSS() {
   const cleanCSS = new CleanCSS({ level: 2, returnPromise: false });
-  const files = ['assets/css/styles.css', 'assets/css/subpage-styles.css', 'assets/css/critical.css'];
+  const files = [
+    `${PUBLIC}/assets/css/styles.css`,
+    `${PUBLIC}/assets/css/subpage-styles.css`,
+    `${PUBLIC}/assets/css/critical.css`
+  ];
   for (const file of files) {
     if (!fs.existsSync(file)) continue;
     const input = fs.readFileSync(file, 'utf8');
@@ -46,10 +49,17 @@ function minifyCSS() {
 }
 
 async function runPurgeCSS() {
-  const htmlFiles = ['index.html', 'myostatin-inhibitors.html', '404.html', 'offline.html'];
-  const cssFiles = ['assets/css/styles.min.css', 'assets/css/subpage-styles.min.css'];
+  const htmlFiles = [
+    `${PUBLIC}/index.html`,
+    `${PUBLIC}/myostatin-inhibitors.html`,
+    `${PUBLIC}/404.html`,
+    `${PUBLIC}/offline.html`
+  ];
+  const cssFiles = [
+    `${PUBLIC}/assets/css/styles.min.css`,
+    `${PUBLIC}/assets/css/subpage-styles.min.css`
+  ];
 
-  // Only purge against files that exist
   const existingHTML = htmlFiles.filter(f => fs.existsSync(f));
   const existingCSS = cssFiles.filter(f => fs.existsSync(f));
 
@@ -73,15 +83,14 @@ async function runPurgeCSS() {
 }
 
 function inlineCriticalCSS() {
-  const criticalPath = 'assets/css/critical.min.css';
+  const criticalPath = `${PUBLIC}/assets/css/critical.min.css`;
   if (!fs.existsSync(criticalPath)) return;
   const critical = fs.readFileSync(criticalPath, 'utf8');
-  const htmlFiles = ['index.html'];
+  const htmlFiles = [`${PUBLIC}/index.html`];
 
   for (const file of htmlFiles) {
     if (!fs.existsSync(file)) continue;
     let html = fs.readFileSync(file, 'utf8');
-    // Replace content between markers
     html = html.replace(
       /<!-- critical-css-start -->[\s\S]*?<!-- critical-css-end -->/,
       `<!-- critical-css-start -->\n<style>${critical}</style>\n<!-- critical-css-end -->`
@@ -92,16 +101,18 @@ function inlineCriticalCSS() {
 }
 
 function bumpVersions() {
-  // Update CSS version refs in index.html
-  if (fs.existsSync('index.html')) {
-    let html = fs.readFileSync('index.html', 'utf8');
+  const indexPath = `${PUBLIC}/index.html`;
+  if (fs.existsSync(indexPath)) {
+    let html = fs.readFileSync(indexPath, 'utf8');
     html = html.replace(/assets\/css\/styles\.min\.css\?v=\d+/g, `assets/css/styles.min.css?v=${CSS_VERSION}`);
     html = html.replace(/assets\/fonts\/fonts\.css\?v=\d+/g, `assets/fonts/fonts.css?v=${CSS_VERSION}`);
-    fs.writeFileSync('index.html', html);
+    fs.writeFileSync(indexPath, html);
   }
 
-  // Update subpage version refs
-  const subpages = fs.readdirSync('.').filter(f => f.endsWith('.html') && f !== 'index.html');
+  const subpages = fs.readdirSync(PUBLIC)
+    .filter(f => f.endsWith('.html') && f !== 'index.html')
+    .map(f => `${PUBLIC}/${f}`);
+
   for (const file of subpages) {
     let html = fs.readFileSync(file, 'utf8');
     html = html.replace(/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
@@ -109,14 +120,14 @@ function bumpVersions() {
     fs.writeFileSync(file, html);
   }
 
-  // Update SW cache version
-  if (fs.existsSync('sw.js')) {
-    let sw = fs.readFileSync('sw.js', 'utf8');
+  const swPath = `${PUBLIC}/sw.js`;
+  if (fs.existsSync(swPath)) {
+    let sw = fs.readFileSync(swPath, 'utf8');
     sw = sw.replace(/const CACHE_VERSION = '[^']+';/, `const CACHE_VERSION = '${SW_CACHE_VERSION}';`);
     sw = sw.replace(/\/assets\/css\/styles\.min\.css\?v=\d+/g, `/assets/css/styles.min.css?v=${CSS_VERSION}`);
     sw = sw.replace(/\/assets\/css\/subpage-styles\.min\.css\?v=\d+/g, `/assets/css/subpage-styles.min.css?v=${CSS_VERSION}`);
     sw = sw.replace(/\/assets\/fonts\/fonts\.css(\?v=\d+)?/g, `/assets/fonts/fonts.css?v=${CSS_VERSION}`);
-    fs.writeFileSync('sw.js', sw);
+    fs.writeFileSync(swPath, sw);
   }
 
   console.log(`✓ Version bumped → CSS v${CSS_VERSION}, SW cache ${SW_CACHE_VERSION}`);
@@ -125,7 +136,7 @@ function bumpVersions() {
 async function runAudit() {
   return new Promise((resolve, reject) => {
     const { spawn } = require('child_process');
-    const proc = spawn(process.execPath, [require('path').join(__dirname, 'audit.js')], {
+    const proc = spawn(process.execPath, [path.join(__dirname, 'audit.js')], {
       stdio: 'inherit',
       env: process.env
     });

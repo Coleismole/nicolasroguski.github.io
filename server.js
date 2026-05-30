@@ -108,7 +108,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   if (req.path === '/' || req.path === '/index.html') {
     res.setHeader('Link', [
-      '</assets/css/styles.min.css?v=9>; rel=preload; as=style',
+      '</assets/css/styles.min.css?v=10>; rel=preload; as=style',
       '</assets/img/nicolas-photo.webp>; rel=preload; as=image; type="image/webp"'
     ].join(', '));
   }
@@ -116,7 +116,7 @@ app.use((req, res, next) => {
 });
 
 // ── Static assets ─────────────────────────────────────────────────────────────
-app.use(express.static(__dirname, {
+app.use(express.static(path.join(__dirname, 'public'), {
   etag: true,
   lastModified: true,
   setHeaders: (res, filepath) => {
@@ -589,7 +589,7 @@ app.get('/sitemap.xml', (req, res) => {
 app.use((req, res) => {
   const acceptsHtml = req.headers.accept && req.headers.accept.includes('text/html');
   if (acceptsHtml) {
-    return res.status(404).sendFile(path.join(__dirname, '404.html'));
+    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
   }
   res.status(404).json({ error: 'Not found', path: req.path });
 });
