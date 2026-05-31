@@ -2,6 +2,8 @@
 
 Personal portfolio site for Nicolas Roguski. Plain HTML/CSS/JS served by a Node.js + Express backend. No frontend framework.
 
+Live at **[nicolasroguski.dev](https://nicolasroguski.dev)**
+
 ---
 
 ## Project Structure
@@ -68,6 +70,8 @@ Open `http://localhost:5000` in your browser.
 | `npm start` | Start the Express server on port 5000 |
 | `npm run build` | Optimize images, minify CSS, inline critical CSS, bump version strings |
 | `npm run build:audit` | Same as above + runs a Lighthouse performance audit |
+| `npm run audit` | Run a Lighthouse audit against the running server |
+| `npm run audit:save` | Run Lighthouse and save the report to disk |
 
 **Always run `npm run build` after editing any `.css` file or replacing the hero photo.** The HTML files reference `.min.css` and versioned assets — the source files are not served directly.
 
@@ -78,15 +82,10 @@ Open `http://localhost:5000` in your browser.
 | Variable | Required | Description |
 |---|---|---|
 | `ADMIN_TOKEN` | Recommended | Protects `/admin` and `/api/analytics/stats`. If unset, admin routes are public. |
-| `ALLOWED_ORIGIN` | Optional | Restricts API CORS to a specific origin (e.g. `https://yoursite.com`). |
+| `ALLOWED_ORIGIN` | Optional | Restricts API CORS to a specific origin (e.g. `https://nicolasroguski.dev`). |
 | `NODE_ENV` | Optional | Set to `production` to suppress stack traces in error responses. |
 
-Set these as Replit Secrets (or export them locally before running):
-
-```bash
-export ADMIN_TOKEN=your-secret-here
-npm start
-```
+Set these as Replit Secrets (never commit them to source control).
 
 ---
 
@@ -124,9 +123,9 @@ npm start
 
 ### Add a new research page
 1. Copy `public/myostatin-inhibitors.html` as a template
-2. Update `<title>`, `<link rel="canonical">`, and page content
+2. Update `<title>`, `<link rel="canonical">`, OG tags, and page content
 3. Add the new path to `pages` in the `/sitemap.xml` route in `server.js`
-4. Add the new path to the `PRECACHE` array in `public/sw.js`
+4. Add the new path to the `PRECACHE_PATHS` array in `public/sw.js`
 5. Add a project card to the `#projects` section in `public/index.html`
 
 ### Bump the CSS/SW cache version
@@ -160,13 +159,11 @@ npm start
 
 ---
 
-## Deployment (Replit)
+## Deployment
 
+- **Platform:** Replit (autoscale)
 - **Run command:** `node server.js`
 - **Port:** 5000
+- **Domain:** [nicolasroguski.dev](https://nicolasroguski.dev)
 - **No build step needed at deploy time** — `.min.css`, `.webp`, and `.avif` are committed
-
-After deploying:
-1. Set `ADMIN_TOKEN` as a production secret in Replit Secrets
-2. Update `<link rel="canonical">` and `og:url` in HTML files to the production domain
-3. Update the `Sitemap:` line in `public/robots.txt` to the production URL
+- `ADMIN_TOKEN` is set as a Replit Secret and picked up automatically on deploy

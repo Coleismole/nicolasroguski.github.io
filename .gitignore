@@ -59,6 +59,9 @@ Thumbs.db
 # Large attachments / backups
 /attached_assets/
 
+# Replit agent internals
+.local/
+
 # Optional: lockfiles (uncomment if you don't want to commit lockfiles)
 # package-lock.json
 # yarn.lock
