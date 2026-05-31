@@ -136,7 +136,7 @@ function bumpVersions() {
 async function runAudit() {
   return new Promise((resolve, reject) => {
     const { spawn } = require('child_process');
-    const proc = spawn(process.execPath, [path.join(__dirname, 'audit.js')], {
+    const proc = spawn(process.execPath, [require('path').join(__dirname, 'audit.js')], {
       stdio: 'inherit',
       env: process.env
     });
@@ -151,7 +151,6 @@ async function runAudit() {
 }
 
 (async () => {
-  const withAudit = process.argv.includes('--audit');
   try {
     await optimizeImage();
     minifyCSS();
@@ -159,12 +158,6 @@ async function runAudit() {
     inlineCriticalCSS();
     bumpVersions();
     console.log('\nBuild complete.');
-    if (withAudit) {
-      console.log('\nRunning Lighthouse audit against http://localhost:5000 …');
-      await runAudit();
-    } else {
-      console.log(`${'\x1b[2m'}Tip: run "npm run build:audit" to also run a Lighthouse performance audit.${'\x1b[0m'}`);
-    }
   } catch (err) {
     console.error('Build failed:', err);
     process.exit(1);
