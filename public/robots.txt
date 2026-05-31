@@ -6,4 +6,4 @@ Disallow: /analytics.json
 
 Allow: /
 
-Sitemap: https://nicolas-roguski.replit.app/sitemap.xml
+Sitemap: https://nicolasroguski.dev/sitemap.xml
