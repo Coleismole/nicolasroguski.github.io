@@ -468,7 +468,7 @@ const cvModal = document.getElementById('cv-modal');
 const cvIframe = document.getElementById('cv-iframe');
 let cvLoaded = false;
 window.openCVModal = function() {
-  if (!cvLoaded) { cvIframe.src = 'nicolas-roguski-cv.pdf'; cvLoaded = true; }
+  if (!cvLoaded) { cvIframe.src = 'assets/pdf/nicolas-roguski-cv.pdf'; cvLoaded = true; }
   cvModal.classList.add('open');
   document.body.style.overflow = 'hidden';
   lenis.stop();
